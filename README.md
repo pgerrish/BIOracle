@@ -20,14 +20,36 @@ The SSH URL matches the existing Mac GitHub workflow. Alternatively, clone `pger
 
 Edit `content/site.json` and `scripts/build.py` for page content and structure. The stylesheet and browser interactions are in `dist/styles.css` and `dist/site.js`.
 
-Python 3.9 or later is sufficient; no third-party packages or Node installation are required. Rebuild after changing the generator or data:
+Python 3.9 or later is sufficient; no third-party packages or Node installation are required. Install the global preview command once:
 
 ```sh
-python3 scripts/build.py
-python3 -m http.server --bind 127.0.0.1 --directory dist 8000
+bash scripts/install-preview-command.sh
+source ~/.zshrc
 ```
 
-Open `http://127.0.0.1:8000/`. Press Control-C to stop the preview. `make build` and `make preview` are shortcuts for these commands.
+Start the preview from any directory:
+
+```sh
+preview_bioracle
+```
+
+It serves the current files from `~/Documents/GitHub/BIOracle/dist` at `http://127.0.0.1:8000/` and opens your browser. Refresh the browser after edits. Keep the Terminal window open; press Control-C to stop. Previewing does not change files or contact GitHub.
+
+After changing `content/site.json` or the page generator, rebuild and preview with:
+
+```sh
+preview_bioracle --build
+```
+
+The default preview leaves direct HTML edits intact. If port 8000 is busy, choose another:
+
+```sh
+preview_bioracle 8001
+```
+
+Use `--no-open` to serve without opening a browser. Set `BIORACLE_REPO` if the clone lives elsewhere, or `BIORACLE_PYTHON` to select another Python executable. Builds with a project URL path such as `/BIOracle/` are also served at that path locally.
+
+You can still rebuild with `python3 scripts/build.py` or `make build`; `make preview` runs the same preview command from the current repository. Re-run the preview installer after updating the script.
 
 The generated `dist/` files are committed, so the repository can also be published directly as a static site.
 

@@ -6,4 +6,4 @@ build:
 	$(PYTHON) scripts/build.py
 
 preview:
-	$(PYTHON) -m http.server --bind 127.0.0.1 --directory dist 8000
+	BIORACLE_REPO="$(CURDIR)" BIORACLE_PYTHON="$(PYTHON)" bash scripts/preview_bioracle.sh
