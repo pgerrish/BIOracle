@@ -33,15 +33,30 @@ The generated `dist/` files are committed, so the repository can also be publish
 
 ## Sync changes
 
-After editing and rebuilding, commit and push in GitHub Desktop, or run:
+Install the global publishing command once, using the same `~/bin` convention as `publish_unm`:
 
 ```sh
-git add .
-git commit -m "Update BIOracle website"
-git push origin main
+bash scripts/install-publish-command.sh
+source ~/.zshrc
 ```
 
-Run `git pull --ff-only` before editing to bring in changes made elsewhere. The remote is `pgerrish/BIOracle`; the primary branch is `main`.
+After editing, run this from any directory:
+
+```sh
+publish_bioracle
+```
+
+To supply a commit message:
+
+```sh
+publish_bioracle "Refine the homepage"
+```
+
+The command uses `~/Documents/GitHub/BIOracle`, fetches the latest GitHub changes, temporarily saves uncommitted edits (including untracked files), rebases `main`, restores the edits, commits all changes, and pushes to `pgerrish/BIOracle`. The default commit message is `Update BIOracle website`. Existing stashes are preserved; synchronization stops on conflicts and retains the backup of your original edits. Pushes use ordinary Git without force.
+
+When changing `content/site.json` or `scripts/build.py`, regenerate the site with `python3 scripts/build.py` before running `publish_bioracle`. CSS, JavaScript, images, and direct edits to existing files are published as they are. The publishing command does not regenerate files or deploy to a hosting service.
+
+Re-run the installer after updating the publishing script. If the clone lives elsewhere, set `BIORACLE_REPO` to its absolute path. The remote is `pgerrish/BIOracle`; the primary branch is `main`.
 
 ## Publishing
 
