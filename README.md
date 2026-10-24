@@ -100,6 +100,21 @@ The contact form prepares an email draft for the visitor to review and send, and
 
 ## Artwork
 
-The graphite pencil backdrop was generated with the built-in image-generation tool and saved as `dist/assets/evolution-pencil.webp`. Prompt: “A spare, sophisticated graphite field notebook composition of things that evolve: a giraffe, a cow, a corn plant, tiny bacteria, a generic virus particle, a financial model graph, and a small AI robot; fine graphite on warm ivory; wide composition, generous central negative space; understated Danish editorial style; no text, labels, or logo.”
+Eight original backgrounds use heavy gray graphite and dark forest-green pencil on pale ivory, with spare surreal forms and generous empty space. Each main page has its own artwork:
+
+| Page | Study |
+| --- | --- |
+| Home | DNA and variation |
+| Research | Folding proteins |
+| Approach | Mathematical trajectories |
+| Consortium | Bacteria and connection |
+| Consulting | Evolving market charts |
+| Publications | Abstract viruses |
+| Contact | Evolving AI bots |
+| Source archive | Evolutionary forms |
+
+Full-resolution PNGs are in `artwork/originals/`; optimized WebP versions are in `dist/assets/artwork/`. The built-in image-generation tool was used for all eight pieces. Complete prompts and page assignments are preserved in `artwork/prompts.json`. Detail pages use the study matching their research topic or parent section. The generator sets the decorative background and social preview image for each page; the stylesheet adjusts the artwork's scale and opacity for smaller screens.
+
+The earlier graphite illustration is retained as `dist/assets/evolution-pencil.webp`.
 
 The supplied BIOracle logo and researcher photographs are retained. Font licensing is included in `dist/assets/font-license.txt`.
