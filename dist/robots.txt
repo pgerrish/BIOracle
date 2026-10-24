@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /archive/
+Sitemap: https://bioracle.philip-gerrish.chatgpt.site/sitemap.xml

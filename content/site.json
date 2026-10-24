@@ -1,0 +1,1966 @@
+{
+  "faculty": [
+    {
+      "name": "Dr. Philip Gerrish",
+      "role": "Principal Investigator",
+      "expertise": [
+        "Evolutionary Theory",
+        "Probability Theory"
+      ],
+      "image": "/headshot9d.jpeg",
+      "slug": "phil-gerrish"
+    },
+    {
+      "name": "Dr. Erika Rodriguez",
+      "role": "Professor",
+      "expertise": [
+        "Neuroscience",
+        "Complexity and Fractals"
+      ],
+      "image": "/erika1c.jpg",
+      "slug": "erika-rodriguez"
+    },
+    {
+      "name": "Dr. Benjamin Itza",
+      "role": "Professor",
+      "expertise": [
+        "Topology",
+        "Algebra"
+      ],
+      "image": "/ben1.jpeg",
+      "slug": "ben-itza"
+    },
+    {
+      "name": "Dr. Pablo Padilla",
+      "role": "Professor",
+      "expertise": [
+        "Physics",
+        "Mathematics",
+        "Music Theory"
+      ],
+      "image": "/pablo1.jpg",
+      "slug": "pablo-padilla"
+    },
+    {
+      "name": "Dr. Paul Sniegowski",
+      "role": "Professor",
+      "expertise": [
+        "Evolutionary Biology",
+        "Population Genetics"
+      ],
+      "image": "/paul1.jpg",
+      "slug": "paul-sniegowski"
+    },
+    {
+      "name": "Dr. Lindi Wahl",
+      "role": "Professor",
+      "expertise": [
+        "Applied Mathematics",
+        "Evolutionary Genetics"
+      ],
+      "image": "/lindi2.png",
+      "slug": "lindi-wahl"
+    },
+    {
+      "name": "Dr. Valeria Souza",
+      "role": "Professor",
+      "expertise": [
+        "Microbial Ecology",
+        "Evolutionary Biology"
+      ],
+      "image": "/valeria1.jpg",
+      "slug": "valeria-souza"
+    },
+    {
+      "name": "Dr. Gabriela Gomes",
+      "role": "Professor",
+      "expertise": [
+        "Applied Mathematics",
+        "Epidemiology"
+      ],
+      "image": "/gabriela1.jpg",
+      "slug": "gabriela-gomes"
+    }
+  ],
+  "research": [
+    {
+      "slug": "cancer",
+      "title": "Somatic Evolution & Cancer",
+      "subtitle": "Understanding cancer through evolutionary dynamics and clonal selection",
+      "overview": "Cancer is fundamentally an evolutionary process occurring within the body. Our research applies evolutionary theory to understand tumor initiation, progression, metastasis, and treatment resistance. By viewing cancer through an evolutionary lens, we develop new strategies for prediction and intervention.",
+      "areas": [
+        "Clonal Evolution: Tracking the emergence and competition of cancer cell lineages within tumors using phylogenetic reconstruction",
+        "Mutation Accumulation: Modeling the temporal dynamics of somatic mutations and their fitness effects in cancer development",
+        "Treatment Resistance: Understanding how evolutionary processes drive resistance to chemotherapy, targeted therapy, and immunotherapy",
+        "Tumor Heterogeneity: Characterizing spatial and temporal variation in tumor cell populations and its clinical implications",
+        "Metastatic Evolution: Investigating the evolutionary trajectories that enable cancer cells to colonize distant sites"
+      ],
+      "methods": "We integrate genomic data from single-cell sequencing, bulk tumor samples, and liquid biopsies with mathematical models of evolutionary dynamics. Our approaches include population genetics theory, stochastic simulation, and machine learning to predict tumor evolution and treatment outcomes.",
+      "projects": [
+        {
+          "title": "Adaptive Therapy Design",
+          "description": "Developing evolution-informed treatment strategies that exploit competitive interactions between resistant and sensitive cancer cells"
+        },
+        {
+          "title": "Early Detection Biomarkers",
+          "description": "Identifying evolutionary signatures in circulating tumor DNA for early cancer detection and monitoring"
+        },
+        {
+          "title": "Tumor Ecosystem Dynamics",
+          "description": "Modeling interactions between cancer cells, immune cells, and the tumor microenvironment as an evolving ecosystem"
+        }
+      ]
+    },
+    {
+      "slug": "dna-rna",
+      "title": "DNA/RNA Evolution & Phylogenetics",
+      "subtitle": "Historical reconstruction and molecular evolution through computational phylogenetics",
+      "overview": "Our DNA/RNA evolution research focuses on understanding the historical processes that have shaped genetic diversity across all domains of life. Using advanced phylogenetic methods, we reconstruct evolutionary relationships and infer the mechanisms driving molecular change.",
+      "areas": [
+        "Phylogenetic Inference: Developing and applying maximum likelihood and Bayesian methods to reconstruct evolutionary trees from molecular sequence data",
+        "Molecular Clock Analysis: Estimating divergence times and rates of evolution across different lineages and genomic regions",
+        "RNA Structure Evolution: Investigating how RNA secondary and tertiary structures evolve under functional constraints",
+        "Codon Usage Bias: Analyzing selection pressures on synonymous codon usage and their implications for gene expression",
+        "Ancient DNA: Reconstructing evolutionary histories from degraded genetic material in paleontological and archaeological samples"
+      ],
+      "methods": "We employ cutting-edge computational methods including probabilistic models of sequence evolution, coalescent theory, and machine learning approaches to extract evolutionary signals from genomic data. Our work combines theoretical development with practical applications to biological questions.",
+      "projects": [
+        {
+          "title": "Viral RNA Evolution",
+          "description": "Tracking rapid evolutionary changes in RNA viruses to predict emergence of new variants"
+        },
+        {
+          "title": "Deep Time Phylogenomics",
+          "description": "Resolving ancient evolutionary relationships using whole-genome data and novel substitution models"
+        },
+        {
+          "title": "Functional Constraint Mapping",
+          "description": "Identifying regions of genomes under purifying selection through comparative genomics"
+        }
+      ]
+    },
+    {
+      "slug": "forecasting",
+      "title": "Evolutionary Forecasting",
+      "subtitle": "Leveraging evolutionary principles to forecast future states of large noisy systems",
+      "overview": "Evolutionary forecasting applies principles from evolutionary theory to predict the future states of complex, dynamic systems. By treating systems as evolving populations subject to selection, drift, and mutation-like processes, we develop robust predictive models that account for uncertainty and adaptation in noisy environments.",
+      "areas": [
+        "Adaptive Forecasting Models: Developing prediction frameworks that evolve with changing system dynamics and learn from forecast errors",
+        "Population-Level Predictions: Forecasting aggregate behaviors in large systems by modeling individual-level variation and selection pressures",
+        "Evolutionary Game Theory: Predicting strategic interactions and equilibria in competitive environments using evolutionary dynamics",
+        "Phylogenetic Forecasting: Using evolutionary relationships and historical patterns to predict future trait evolution and system trajectories",
+        "Noise-Robust Prediction: Developing forecasting methods that maintain accuracy despite high levels of stochasticity and measurement uncertainty"
+      ],
+      "methods": "We combine evolutionary algorithms, Bayesian inference, and machine learning to create forecasting systems that adapt to changing conditions. Our methods incorporate fitness landscapes, selection gradients, and evolutionary constraints to generate predictions that account for both deterministic trends and stochastic variation.",
+      "projects": [
+        {
+          "title": "Market Evolution Forecasting",
+          "description": "Predicting financial market dynamics by modeling trading strategies as evolving populations competing for resources"
+        },
+        {
+          "title": "Pathogen Trajectory Prediction",
+          "description": "Forecasting viral evolution and epidemic spread using phylodynamic models and evolutionary constraints"
+        },
+        {
+          "title": "Adaptive Climate Models",
+          "description": "Developing evolutionary forecasting approaches for ecological systems responding to environmental change"
+        }
+      ]
+    },
+    {
+      "slug": "immunity",
+      "title": "Immunity",
+      "subtitle": "Evolutionary perspectives on immune system function and host defense",
+      "overview": "The immune system is a product of millions of years of coevolution with pathogens. Our research examines how evolutionary pressures have shaped immune function, diversity, and dysfunction. We study both the evolution of immunity across species and the rapid evolution occurring within individual immune responses.",
+      "areas": [
+        "Adaptive Immune Diversity: Understanding how somatic evolution generates antibody and T-cell receptor diversity through V(D)J recombination and somatic hypermutation",
+        "Host-Pathogen Arms Races: Investigating the coevolutionary dynamics between immune defenses and pathogen evasion strategies",
+        "Immune System Evolution: Comparing immune mechanisms across species to understand the evolutionary origins and constraints of immunity",
+        "Autoimmunity and Trade-offs: Examining how evolutionary trade-offs between pathogen defense and self-tolerance lead to autoimmune diseases",
+        "Clonal Selection Dynamics: Modeling the evolutionary dynamics of lymphocyte populations during immune responses and immunological memory formation"
+      ],
+      "methods": "We use immune repertoire sequencing to track the evolution of B and T cell populations, comparative genomics to understand immune system evolution across species, and mathematical modeling to predict immune response dynamics. Our work integrates immunology with evolutionary theory and population genetics.",
+      "projects": [
+        {
+          "title": "Vaccine Response Evolution",
+          "description": "Tracking the evolutionary dynamics of antibody responses to vaccination and predicting long-term immunity"
+        },
+        {
+          "title": "Cancer Immunoediting",
+          "description": "Understanding how tumors evolve to escape immune surveillance and how to leverage evolutionary principles for immunotherapy"
+        },
+        {
+          "title": "Innate Immunity Evolution",
+          "description": "Investigating the evolutionary conservation and diversification of pattern recognition receptors across species"
+        }
+      ]
+    },
+    {
+      "slug": "markets",
+      "title": "Evolution of Financial Markets",
+      "subtitle": "Applying evolutionary theory to economic systems and market dynamics",
+      "overview": "Financial markets exhibit evolutionary dynamics analogous to biological systems, with competing strategies, adaptation to changing environments, and selection pressures shaping market behavior. Our research applies evolutionary theory and population dynamics to understand and predict financial market phenomena.",
+      "areas": [
+        "Trading Strategy Evolution: Modeling how investment strategies compete, adapt, and evolve in response to market conditions and other strategies",
+        "Market Ecology: Analyzing financial markets as ecosystems with diverse agent types, resource competition, and predator-prey dynamics",
+        "Innovation Diffusion: Studying how financial innovations spread through markets and the evolutionary pressures that shape their adoption",
+        "Regulatory Evolution: Understanding how market regulations coevolve with trading practices and institutional structures",
+        "Crisis Dynamics: Applying evolutionary models to understand market crashes, bubbles, and systemic risk emergence"
+      ],
+      "methods": "We employ agent-based modeling, evolutionary game theory, and network analysis to simulate market evolution. Our work integrates high-frequency trading data with theoretical models from population genetics and ecology to reveal fundamental principles governing market dynamics.",
+      "projects": [
+        {
+          "title": "Algorithmic Trading Evolution",
+          "description": "Investigating how machine learning algorithms evolve and compete in modern high-frequency trading environments"
+        },
+        {
+          "title": "Cryptocurrency Market Dynamics",
+          "description": "Applying evolutionary models to understand the emergence and competition of digital currencies and DeFi protocols"
+        },
+        {
+          "title": "Behavioral Finance Evolution",
+          "description": "Modeling how cognitive biases and heuristics evolve under market selection pressures"
+        }
+      ]
+    },
+    {
+      "slug": "microbes",
+      "title": "Microbes",
+      "subtitle": "Evolutionary dynamics of microbial populations and communities",
+      "overview": "Microbial evolution operates at extraordinary speeds, making microbes ideal systems for studying evolutionary processes in real-time. Our research examines how bacteria, archaea, viruses, and fungi evolve in response to environmental pressures, competition, and cooperation within complex communities.",
+      "areas": [
+        "Experimental Evolution: Using laboratory evolution experiments to observe adaptation, mutation accumulation, and evolutionary innovation in real-time",
+        "Microbial Community Dynamics: Modeling ecological and evolutionary interactions within microbiomes and their impact on host health",
+        "Horizontal Gene Transfer: Investigating how genetic exchange between microbes accelerates adaptation and spreads traits like antibiotic resistance",
+        "Metabolic Evolution: Understanding how microbial metabolic networks evolve to exploit new resources and environmental niches",
+        "Viral-Host Coevolution: Studying the evolutionary arms race between bacteriophages and their bacterial hosts"
+      ],
+      "methods": "We combine experimental evolution with high-throughput genomic sequencing, metagenomics, and computational modeling. Our work integrates population genetics theory with systems biology to predict evolutionary trajectories and understand the genetic basis of adaptation.",
+      "projects": [
+        {
+          "title": "Antibiotic Resistance Evolution",
+          "description": "Tracking the emergence and spread of resistance mechanisms in bacterial populations under different treatment regimens"
+        },
+        {
+          "title": "Microbiome Assembly Rules",
+          "description": "Determining how evolutionary and ecological processes shape the composition and function of microbial communities"
+        },
+        {
+          "title": "Synthetic Microbial Consortia",
+          "description": "Engineering stable microbial communities for biotechnology applications using evolutionary principles"
+        }
+      ]
+    }
+  ],
+  "risk_research": [
+    {
+      "title": "Containment Expiration Frameworks",
+      "description": "Developing predictive mathematical models to determine when biocontainment systems will fail and establishing evidence-based expiration dates for containment strategies.",
+      "challenges": [
+        "Quantifying mutation accumulation over time",
+        "Modeling selection pressures in contained environments",
+        "Integrating stochastic escape events",
+        "Accounting for horizontal gene transfer"
+      ],
+      "approaches": [
+        "Stochastic differential equations",
+        "Monte Carlo simulations",
+        "Bayesian inference frameworks",
+        "Time-series reliability analysis"
+      ],
+      "applications": [
+        "Industrial bioreactor safety protocols",
+        "Environmental release risk windows",
+        "Regulatory compliance timelines",
+        "Laboratory containment scheduling"
+      ]
+    },
+    {
+      "title": "Bacterial Kill-Switch Evolution",
+      "description": "Investigating the evolutionary stability of genetic kill-switches and predicting pathways to escape from toxin-antitoxin systems and inducible suicide mechanisms.",
+      "challenges": [
+        "Predicting compensatory mutations",
+        "Understanding fitness trade-offs",
+        "Modeling gene circuit degradation",
+        "Assessing cross-feeding dynamics"
+      ],
+      "approaches": [
+        "Population genetics theory",
+        "Evolutionary game theory",
+        "Mutation-selection balance models",
+        "Experimental evolution validation"
+      ],
+      "applications": [
+        "Robust kill-switch design principles",
+        "Multi-layered safety system optimization",
+        "Auxotrophy strategy evaluation",
+        "Genetic firewall development"
+      ]
+    },
+    {
+      "title": "Spillover Risk Assessment",
+      "description": "Quantifying the probability and impact of engineered organisms establishing in natural ecosystems or interacting with immune systems in unintended ways.",
+      "challenges": [
+        "Modeling ecological fitness landscapes",
+        "Predicting host-range expansion",
+        "Assessing immunogenicity risks",
+        "Understanding community-level impacts"
+      ],
+      "approaches": [
+        "Ecological network analysis",
+        "Trait-based modeling",
+        "Phylogenetic risk prediction",
+        "Agent-based ecosystem simulations"
+      ],
+      "applications": [
+        "Environmental release safety protocols",
+        "Agricultural biosafety standards",
+        "Therapeutic organism design guidelines",
+        "Ecosystem impact assessments"
+      ]
+    },
+    {
+      "title": "Interaction Risks",
+      "description": "Analyzing potential adverse interactions between engineered systems and host immune responses, microbiomes, or ecological communities.",
+      "challenges": [
+        "Characterizing immune response dynamics",
+        "Modeling microbiome perturbations",
+        "Predicting off-target ecological effects",
+        "Assessing cascade failures"
+      ],
+      "approaches": [
+        "Systems biology modeling",
+        "Network perturbation analysis",
+        "Immunological modeling",
+        "Food web dynamics"
+      ],
+      "applications": [
+        "Live biotherapeutic safety evaluation",
+        "Agricultural biocontrol risk assessment",
+        "Probiotic strain safety testing",
+        "Ecosystem restoration planning"
+      ]
+    },
+    {
+      "title": "Evolutionary Targets of Concern",
+      "description": "Identifying specific evolutionary trajectories, mutations, or gene combinations that would create heightened biosecurity risks and developing early warning systems.",
+      "challenges": [
+        "Defining risk-relevant phenotypes",
+        "Predicting convergent evolution",
+        "Monitoring population-level changes",
+        "Establishing intervention thresholds"
+      ],
+      "approaches": [
+        "Predictive evolutionary modeling",
+        "Sequence-to-phenotype mapping",
+        "Risk-weighted trajectory analysis",
+        "Real-time genomic surveillance integration"
+      ],
+      "applications": [
+        "Early warning surveillance systems",
+        "Intervention trigger protocols",
+        "Adaptive management frameworks",
+        "Regulatory monitoring programs"
+      ]
+    }
+  ],
+  "risk_context": {
+    "overview": "Synthetic biology enables the design and construction of new biological parts, devices, and systems for useful purposes. However, these capabilities raise important biosecurity considerations that require rigorous mathematical and theoretical frameworks.",
+    "keyConcepts": [
+      {
+        "term": "Biocontainment",
+        "definition": "Strategies to prevent engineered organisms from persisting in unintended environments, including genetic, chemical, and physical barriers."
+      },
+      {
+        "term": "Kill Switches",
+        "definition": "Genetic circuits designed to eliminate cells when specific conditions are met or when they escape containment, using toxin-antitoxin systems or essential gene dependencies."
+      },
+      {
+        "term": "Evolutionary Stability",
+        "definition": "The capacity of engineered genetic circuits to resist degradation or escape through mutation and selection over microbial generations."
+      },
+      {
+        "term": "Auxotrophy",
+        "definition": "Engineering organisms to require specific nutrients not available in natural environments, creating a metabolic dependency for survival."
+      },
+      {
+        "term": "Gene Drive",
+        "definition": "Genetic elements that bias inheritance to increase their frequency in populations, with potential for rapid ecological spread."
+      }
+    ],
+    "currentChallenges": [
+      "Traditional homology-based DNA screening is inadequate for generative AI-designed proteins with novel functions",
+      "Synthetic gene circuits often degrade over time due to mutation and selection pressures from host resource burden",
+      "Horizontal gene transfer can spread engineered genetic elements to non-target organisms",
+      "Long-term evolutionary dynamics of engineered systems remain poorly characterized",
+      "Risk assessment frameworks lag behind the pace of technological advancement"
+    ]
+  },
+  "services": [
+    {
+      "title": "Biosecurity Risk Assessment",
+      "description": "Comprehensive evaluation of containment strategies and evolutionary risks for synthetic biology projects",
+      "features": [
+        "Kill-switch robustness analysis",
+        "Containment expiration prediction",
+        "Spillover risk quantification",
+        "Regulatory compliance guidance"
+      ],
+      "duration": "2-4 weeks",
+      "price": "Contact for pricing"
+    },
+    {
+      "title": "Evolutionary Modeling",
+      "description": "Custom mathematical frameworks to predict evolutionary trajectories in engineered systems",
+      "features": [
+        "Stochastic evolutionary models",
+        "Population dynamics simulation",
+        "Mutation-selection analysis",
+        "Long-term stability forecasting"
+      ],
+      "duration": "4-8 weeks",
+      "price": "Contact for pricing"
+    },
+    {
+      "title": "Strategic Consulting",
+      "description": "Expert guidance on biosecurity strategy, research direction, and regulatory navigation",
+      "features": [
+        "One-on-one expert sessions",
+        "Research strategy development",
+        "Funding proposal review",
+        "Regulatory pathway planning"
+      ],
+      "duration": "Hourly or project-based",
+      "price": "$300/hour"
+    },
+    {
+      "title": "Rapid Assessment",
+      "description": "Quick turnaround analysis for time-sensitive biosecurity questions",
+      "features": [
+        "48-hour preliminary assessment",
+        "Executive summary report",
+        "Critical risk identification",
+        "Recommended action items"
+      ],
+      "duration": "2-3 days",
+      "price": "Starting at $2,500"
+    }
+  ],
+  "legacy_members": [
+    {
+      "id": "maria-rodriguez",
+      "name": "Dr. Maria Rodriguez",
+      "role": "Principal Investigator",
+      "position": "Professor",
+      "department": "Mathematics",
+      "institution": "ERA Berlin",
+      "expertise": [
+        "Evolutionary Genetics",
+        "Mathematical Modeling",
+        "Containment Theory"
+      ],
+      "image": "/members/maria-rodriguez.jpg",
+      "email": "maria.rodriguez@example.com",
+      "bio": "Dr. Rodriguez leads the research group with over 15 years of experience in theoretical evolutionary genetics. Her work focuses on developing predictive mathematical frameworks for biological containment systems. She received her PhD from Stanford University and has published over 60 peer-reviewed papers in evolutionary biology and mathematical modeling.",
+      "education": [
+        {
+          "degree": "PhD in Applied Mathematics",
+          "institution": "Stanford University",
+          "year": "2008"
+        },
+        {
+          "degree": "MSc in Mathematical Biology",
+          "institution": "University of Oxford",
+          "year": "2004"
+        },
+        {
+          "degree": "BSc in Mathematics",
+          "institution": "LMU Munich",
+          "year": "2002"
+        }
+      ],
+      "selectedPublications": [
+        {
+          "title": "Predictive frameworks for biocontainment expiration in engineered systems",
+          "journal": "Nature Biotechnology",
+          "year": "2024"
+        },
+        {
+          "title": "Mathematical analysis of kill-switch evolutionary stability",
+          "journal": "PLOS Computational Biology",
+          "year": "2023"
+        },
+        {
+          "title": "Stochastic models for synthetic gene circuit degradation",
+          "journal": "Molecular Systems Biology",
+          "year": "2022"
+        }
+      ],
+      "researchInterests": [
+        "Containment expiration modeling",
+        "Evolutionary prediction algorithms",
+        "Biocontainment strategy optimization",
+        "Risk assessment frameworks"
+      ],
+      "website": "https://example.com/maria-rodriguez",
+      "twitter": "mrodriguez_bio",
+      "linkedin": "maria-rodriguez-phd"
+    },
+    {
+      "id": "juan-garcia",
+      "name": "Dr. Juan Garcia",
+      "role": "Senior Researcher",
+      "position": "Associate Professor",
+      "department": "Mathematics",
+      "institution": "ERA Berlin",
+      "expertise": [
+        "Kill-Switch Evolution",
+        "Population Dynamics",
+        "Stochastic Processes"
+      ],
+      "image": "/members/juan-garcia.jpg",
+      "email": "juan.garcia@example.com",
+      "bio": "Dr. Garcia specializes in the evolutionary dynamics of bacterial kill-switches and safety mechanisms in synthetic biology. His research combines stochastic modeling with experimental validation to predict and prevent evolutionary escape from biocontainment systems.",
+      "education": [
+        {
+          "degree": "PhD in Computational Biology",
+          "institution": "MIT",
+          "year": "2012"
+        },
+        {
+          "degree": "MSc in Applied Mathematics",
+          "institution": "TU Munich",
+          "year": "2008"
+        },
+        {
+          "degree": "BSc in Physics",
+          "institution": "Heidelberg University",
+          "year": "2006"
+        }
+      ],
+      "selectedPublications": [
+        {
+          "title": "Evolutionary pathways to kill-switch failure in synthetic bacteria",
+          "journal": "Science Advances",
+          "year": "2024"
+        },
+        {
+          "title": "Population dynamics of engineered microorganisms under selection",
+          "journal": "Nature Communications",
+          "year": "2023"
+        }
+      ],
+      "researchInterests": [
+        "Kill-switch robustness",
+        "Mutation-selection balance",
+        "Synthetic circuit evolution",
+        "Biocontainment failure modes"
+      ],
+      "website": "https://example.com/juan-garcia",
+      "linkedin": "juan-garcia-math"
+    },
+    {
+      "id": "ana-lopez",
+      "name": "Dr. Ana Lopez",
+      "role": "Postdoctoral Researcher",
+      "position": "Postdoc",
+      "department": "Mathematics",
+      "institution": "ERA Berlin",
+      "expertise": [
+        "Spillover Risk",
+        "Network Analysis",
+        "Ecological Modeling"
+      ],
+      "image": "/members/ana-lopez.jpg",
+      "email": "ana.lopez@example.com",
+      "bio": "Dr. Lopez investigates spillover risks and ecological interactions of engineered organisms. Her research uses network theory and ecological modeling to assess potential impacts of synthetic biology on natural ecosystems and identify critical intervention points.",
+      "education": [
+        {
+          "degree": "PhD in Ecology and Evolution",
+          "institution": "UC Berkeley",
+          "year": "2020"
+        },
+        {
+          "degree": "MSc in Environmental Science",
+          "institution": "ETH Zurich",
+          "year": "2016"
+        },
+        {
+          "degree": "BSc in Biology",
+          "institution": "Humboldt University Berlin",
+          "year": "2014"
+        }
+      ],
+      "selectedPublications": [
+        {
+          "title": "Network-based assessment of engineered organism spillover potential",
+          "journal": "Ecology Letters",
+          "year": "2023"
+        },
+        {
+          "title": "Ecological risk factors in synthetic biology release",
+          "journal": "Trends in Ecology",
+          "year": "2022"
+        }
+      ],
+      "researchInterests": [
+        "Ecological spillover modeling",
+        "Host-pathogen interactions",
+        "Biosafety risk assessment",
+        "Community ecology of engineered systems"
+      ],
+      "linkedin": "ana-lopez-ecology"
+    },
+    {
+      "id": "carlos-martinez",
+      "name": "Carlos Martinez",
+      "role": "Graduate Student",
+      "position": "PhD Candidate",
+      "department": "Mathematics",
+      "institution": "ERA Berlin",
+      "expertise": [
+        "Computational Biology",
+        "Bayesian Inference",
+        "Risk Assessment"
+      ],
+      "image": "/members/carlos-martinez.jpg",
+      "email": "carlos.martinez@example.com",
+      "bio": "Carlos is a PhD candidate developing Bayesian frameworks for biosecurity risk assessment. His dissertation focuses on probabilistic models for predicting evolutionary outcomes in synthetic biological systems under uncertainty.",
+      "education": [
+        {
+          "degree": "PhD in Mathematics (in progress)",
+          "institution": "ERA Berlin",
+          "year": "Expected 2026"
+        },
+        {
+          "degree": "MSc in Applied Mathematics",
+          "institution": "TU Berlin",
+          "year": "2022"
+        },
+        {
+          "degree": "BSc in Mathematics",
+          "institution": "FU Berlin",
+          "year": "2020"
+        }
+      ],
+      "selectedPublications": [
+        {
+          "title": "Bayesian approaches to containment uncertainty quantification",
+          "journal": "In preparation",
+          "year": "2025"
+        }
+      ],
+      "researchInterests": [
+        "Bayesian risk modeling",
+        "Uncertainty quantification",
+        "Computational inference methods",
+        "Decision theory in biosecurity"
+      ]
+    },
+    {
+      "id": "sofia-hernandez",
+      "name": "Sofia Hernandez",
+      "role": "Graduate Student",
+      "position": "PhD Candidate",
+      "department": "Mathematics",
+      "institution": "ERA Berlin",
+      "expertise": [
+        "Evolutionary Trajectories",
+        "Game Theory",
+        "Biocontainment"
+      ],
+      "image": "/members/sofia-hernandez.jpg",
+      "email": "sofia.hernandez@example.com",
+      "bio": "Sofia's research applies game theory to understand evolutionary strategies in biocontainment scenarios. She develops models to predict how engineered organisms might evolve under various selective pressures and containment strategies.",
+      "education": [
+        {
+          "degree": "PhD in Mathematics (in progress)",
+          "institution": "ERA Berlin",
+          "year": "Expected 2025"
+        },
+        {
+          "degree": "MSc in Mathematical Biology",
+          "institution": "University of Bonn",
+          "year": "2021"
+        },
+        {
+          "degree": "BSc in Mathematics",
+          "institution": "Heidelberg University",
+          "year": "2019"
+        }
+      ],
+      "selectedPublications": [
+        {
+          "title": "Game-theoretic models of evolutionary escape in synthetic systems",
+          "journal": "Journal of Theoretical Biology",
+          "year": "2024"
+        }
+      ],
+      "researchInterests": [
+        "Evolutionary game theory",
+        "Adaptive dynamics",
+        "Strategic evolution modeling",
+        "Containment strategy design"
+      ]
+    },
+    {
+      "id": "david-chen",
+      "name": "Dr. David Chen",
+      "role": "Collaborator",
+      "position": "Associate Professor",
+      "department": "Biology",
+      "institution": "UC Berkeley",
+      "expertise": [
+        "Synthetic Biology",
+        "Biosafety",
+        "Genetic Engineering"
+      ],
+      "image": "/members/david-chen.jpg",
+      "email": "david.chen@example.com",
+      "bio": "Dr. Chen is a synthetic biologist collaborating with the group to provide experimental validation of theoretical predictions. His lab specializes in engineering bacterial systems with enhanced safety features and testing evolutionary stability of biocontainment mechanisms.",
+      "education": [
+        {
+          "degree": "PhD in Molecular Biology",
+          "institution": "Harvard University",
+          "year": "2010"
+        },
+        {
+          "degree": "BSc in Biochemistry",
+          "institution": "UCLA",
+          "year": "2005"
+        }
+      ],
+      "selectedPublications": [
+        {
+          "title": "Experimental validation of kill-switch evolution predictions",
+          "journal": "ACS Synthetic Biology",
+          "year": "2024"
+        },
+        {
+          "title": "Engineering robust biocontainment in E. coli chassis strains",
+          "journal": "Nature Biotechnology",
+          "year": "2023"
+        }
+      ],
+      "researchInterests": [
+        "Synthetic biosafety systems",
+        "Genetic circuit engineering",
+        "Experimental evolution",
+        "Biocontainment validation"
+      ],
+      "website": "https://example.com/david-chen",
+      "twitter": "davidchen_synbio",
+      "linkedin": "david-chen-berkeley"
+    }
+  ],
+  "legacy_lab_people": {
+    "sarah-chen": {
+      "name": "Dr. Sarah Chen",
+      "role": "Principal Investigator",
+      "image": "/professional-woman-scientist.png",
+      "email": "sarah.chen@teplab.org",
+      "website": "https://sarahchen.research.org",
+      "expertise": [
+        "Phylogenetics",
+        "Molecular Evolution",
+        "Computational Biology"
+      ],
+      "bio": "Dr. Chen leads the Evolutionary Processes Lab with a focus on phylogenetic methods and molecular evolution. Her work has pioneered new approaches to understanding deep evolutionary relationships through genomic data. With over 15 years of experience, she has published extensively on RNA evolution and computational phylogenetics.",
+      "education": [
+        "PhD in Evolutionary Biology, Stanford University",
+        "MS in Computational Biology, MIT",
+        "BS in Biology, UC Berkeley"
+      ],
+      "researchInterests": [
+        "Phylogenetic inference methods",
+        "RNA structure evolution",
+        "Ancient DNA analysis",
+        "Molecular clock modeling"
+      ],
+      "selectedPublications": [
+        "Chen, S. et al. (2023). Novel approaches to deep-time phylogenetic reconstruction. Nature Methods.",
+        "Chen, S. & Rodriguez, M. (2022). RNA structure constraints in viral evolution. Molecular Biology and Evolution.",
+        "Chen, S. et al. (2021). Computational methods for ancient DNA analysis. Genome Research."
+      ]
+    },
+    "michael-rodriguez": {
+      "name": "Dr. Michael Rodriguez",
+      "role": "Senior Research Scientist",
+      "image": "/professional-scientist.png",
+      "email": "michael.rodriguez@teplab.org",
+      "website": "https://mrodriguez.research.org",
+      "expertise": [
+        "Cancer Evolution",
+        "Computational Biology",
+        "Tumor Dynamics"
+      ],
+      "bio": "Dr. Rodriguez specializes in applying evolutionary theory to understand cancer progression and treatment resistance. His interdisciplinary approach combines genomics, mathematical modeling, and clinical data to develop evolution-informed cancer therapies. He has been instrumental in establishing collaborations with major cancer research centers.",
+      "education": [
+        "PhD in Cancer Biology, Johns Hopkins University",
+        "MS in Applied Mathematics, Caltech",
+        "BS in Biochemistry, UCLA"
+      ],
+      "researchInterests": [
+        "Clonal evolution in tumors",
+        "Adaptive therapy strategies",
+        "Single-cell genomics",
+        "Treatment resistance mechanisms"
+      ],
+      "selectedPublications": [
+        "Rodriguez, M. et al. (2023). Evolutionary dynamics of treatment resistance in cancer. Cell.",
+        "Rodriguez, M. & Chen, S. (2022). Phylogenetic approaches to tumor evolution. Cancer Research.",
+        "Rodriguez, M. et al. (2021). Adaptive therapy design using evolutionary game theory. Nature Medicine."
+      ]
+    },
+    "aisha-patel": {
+      "name": "Dr. Aisha Patel",
+      "role": "Associate Researcher",
+      "image": "/professional-woman-researcher.png",
+      "email": "aisha.patel@teplab.org",
+      "website": "https://apatel.research.org",
+      "expertise": [
+        "Epidemiology",
+        "Public Health",
+        "Disease Modeling"
+      ],
+      "bio": "Dr. Patel brings expertise in evolutionary epidemiology and public health to the lab. Her research focuses on understanding how pathogens evolve in response to interventions and how evolutionary thinking can improve disease control strategies. She maintains active collaborations with public health agencies worldwide.",
+      "education": [
+        "PhD in Epidemiology, Harvard University",
+        "MPH in Global Health, Columbia University",
+        "BS in Biology, University of Michigan"
+      ],
+      "researchInterests": [
+        "Pathogen evolution and transmission",
+        "Vaccine escape dynamics",
+        "Phylodynamic inference",
+        "Public health intervention design"
+      ],
+      "selectedPublications": [
+        "Patel, A. et al. (2023). Evolution-informed strategies for pandemic preparedness. Science.",
+        "Patel, A. & Sharma, P. (2022). Phylodynamics of emerging infectious diseases. PLOS Pathogens.",
+        "Patel, A. et al. (2021). Optimizing intervention timing using evolutionary models. Epidemiology."
+      ]
+    },
+    "james-thompson": {
+      "name": "Dr. James Thompson",
+      "role": "Research Fellow",
+      "image": "/professional-man-economist.jpg",
+      "email": "james.thompson@teplab.org",
+      "website": "https://jthompson.research.org",
+      "expertise": [
+        "Financial Markets",
+        "Quantitative Analysis",
+        "Evolutionary Economics"
+      ],
+      "bio": "Dr. Thompson applies evolutionary theory to financial markets, studying how trading strategies and market structures evolve over time. His unique background in both evolutionary biology and quantitative finance enables novel insights into market dynamics. He works closely with financial institutions to develop evolution-aware trading systems.",
+      "education": [
+        "PhD in Quantitative Finance, University of Chicago",
+        "MS in Evolutionary Biology, Princeton University",
+        "BS in Mathematics, Cambridge University"
+      ],
+      "researchInterests": [
+        "Algorithmic trading evolution",
+        "Market ecology and dynamics",
+        "Cryptocurrency evolution",
+        "Behavioral finance from an evolutionary perspective"
+      ],
+      "selectedPublications": [
+        "Thompson, J. et al. (2023). Evolutionary dynamics in high-frequency trading. Journal of Finance.",
+        "Thompson, J. & Kim, D. (2022). Cryptocurrency markets as evolutionary systems. Nature Finance.",
+        "Thompson, J. et al. (2021). Agent-based models of market evolution. Quantitative Finance."
+      ]
+    },
+    "emily-zhang": {
+      "name": "Emily Zhang",
+      "role": "PhD Candidate",
+      "image": "/young-woman-graduate-student.jpg",
+      "email": "emily.zhang@teplab.org",
+      "expertise": [
+        "Viral Evolution",
+        "Bioinformatics",
+        "Genomic Analysis"
+      ],
+      "bio": "Emily is a PhD candidate studying viral evolution with a focus on RNA viruses. Her dissertation research examines how viral populations adapt to host immune responses and antiviral treatments. She has developed novel bioinformatics tools for analyzing viral sequence data from clinical samples.",
+      "education": [
+        "MS in Bioinformatics, UC San Diego",
+        "BS in Computer Science, Cornell University"
+      ],
+      "researchInterests": [
+        "Viral adaptation mechanisms",
+        "Immune escape evolution",
+        "Bioinformatics tool development",
+        "Clinical viral genomics"
+      ],
+      "selectedPublications": [
+        "Zhang, E. & Chen, S. (2023). Rapid adaptation in RNA virus populations. Virus Evolution.",
+        "Zhang, E. et al. (2022). Novel tools for viral phylodynamic analysis. Bioinformatics."
+      ]
+    },
+    "marcus-johnson": {
+      "name": "Marcus Johnson",
+      "role": "PhD Candidate",
+      "image": "/young-man-graduate-student.jpg",
+      "email": "marcus.johnson@teplab.org",
+      "expertise": [
+        "Tumor Heterogeneity",
+        "Single-Cell Analysis",
+        "Cancer Genomics"
+      ],
+      "bio": "Marcus is investigating tumor heterogeneity and clonal evolution using single-cell sequencing technologies. His work aims to understand how different cancer cell populations compete and cooperate within tumors, with implications for predicting treatment outcomes.",
+      "education": [
+        "MS in Cancer Biology, MD Anderson Cancer Center",
+        "BS in Molecular Biology, Yale University"
+      ],
+      "researchInterests": [
+        "Single-cell genomics",
+        "Tumor microenvironment evolution",
+        "Clonal competition dynamics",
+        "Predictive modeling of treatment response"
+      ],
+      "selectedPublications": [
+        "Johnson, M. & Rodriguez, M. (2023). Spatial patterns of clonal evolution in tumors. Cancer Cell.",
+        "Johnson, M. et al. (2022). Single-cell analysis reveals tumor ecosystem dynamics. Nature Communications."
+      ]
+    },
+    "priya-sharma": {
+      "name": "Priya Sharma",
+      "role": "PhD Candidate",
+      "image": "/young-woman-phd-student.jpg",
+      "email": "priya.sharma@teplab.org",
+      "expertise": [
+        "Disease Modeling",
+        "Statistical Methods",
+        "Epidemiological Analysis"
+      ],
+      "bio": "Priya develops statistical methods for analyzing disease evolution and transmission. Her research combines mathematical modeling with genomic epidemiology to track pathogen spread and predict outbreak dynamics. She is particularly interested in antimicrobial resistance evolution.",
+      "education": [
+        "MS in Biostatistics, University of Washington",
+        "BS in Statistics, University of Toronto"
+      ],
+      "researchInterests": [
+        "Statistical phylodynamics",
+        "Antimicrobial resistance modeling",
+        "Outbreak prediction",
+        "Bayesian inference methods"
+      ],
+      "selectedPublications": [
+        "Sharma, P. & Patel, A. (2023). Bayesian methods for transmission network inference. Epidemics.",
+        "Sharma, P. et al. (2022). Modeling antimicrobial resistance evolution. PLOS Computational Biology."
+      ]
+    },
+    "david-kim": {
+      "name": "David Kim",
+      "role": "Master's Student",
+      "image": "/young-man-masters-student.jpg",
+      "email": "david.kim@teplab.org",
+      "expertise": [
+        "Algorithmic Trading",
+        "Machine Learning",
+        "Market Analysis"
+      ],
+      "bio": "David is a master's student working on evolutionary dynamics in algorithmic trading systems. His thesis explores how machine learning algorithms compete and adapt in financial markets, drawing parallels with biological evolution.",
+      "education": [
+        "BS in Computer Science, Carnegie Mellon University"
+      ],
+      "researchInterests": [
+        "Machine learning in finance",
+        "Evolutionary algorithms",
+        "High-frequency trading dynamics",
+        "Market microstructure"
+      ],
+      "selectedPublications": [
+        "Kim, D. & Thompson, J. (2023). Evolution of trading algorithms in competitive markets. arXiv preprint."
+      ]
+    },
+    "sofia-martinez": {
+      "name": "Sofia Martinez",
+      "role": "Master's Student",
+      "image": "/young-woman-masters-student.jpg",
+      "email": "sofia.martinez@teplab.org",
+      "expertise": [
+        "RNA Structure",
+        "Comparative Genomics",
+        "Molecular Evolution"
+      ],
+      "bio": "Sofia is studying RNA structure evolution across diverse organisms. Her master's research focuses on understanding how functional constraints shape RNA secondary structure evolution, with applications to understanding viral adaptation.",
+      "education": [
+        "BS in Molecular Biology, University of Texas at Austin"
+      ],
+      "researchInterests": [
+        "RNA structure prediction",
+        "Comparative genomics",
+        "Functional constraint analysis",
+        "Viral RNA evolution"
+      ],
+      "selectedPublications": [
+        "Martinez, S. & Chen, S. (2023). Constraints on RNA structure evolution in viruses. RNA Biology."
+      ]
+    },
+    "alex-chen": {
+      "name": "Alex Chen",
+      "role": "Research Assistant",
+      "image": "/young-person-research-assistant.jpg",
+      "email": "alex.chen@teplab.org",
+      "expertise": [
+        "Data Analysis",
+        "Visualization",
+        "Computational Tools"
+      ],
+      "bio": "Alex supports multiple research projects in the lab through data analysis and visualization. They develop interactive tools for exploring evolutionary data and help maintain the lab's computational infrastructure.",
+      "education": [
+        "BS in Data Science, UC Berkeley"
+      ],
+      "researchInterests": [
+        "Data visualization",
+        "Scientific computing",
+        "Bioinformatics pipelines",
+        "Interactive analysis tools"
+      ],
+      "selectedPublications": []
+    }
+  },
+  "legacy_students": [
+    {
+      "name": "Emily Zhang",
+      "role": "PhD Candidate",
+      "expertise": [
+        "Viral Evolution",
+        "Bioinformatics"
+      ],
+      "image": "/young-woman-graduate-student.jpg",
+      "slug": "emily-zhang"
+    },
+    {
+      "name": "Marcus Johnson",
+      "role": "PhD Candidate",
+      "expertise": [
+        "Tumor Heterogeneity",
+        "Single-Cell Analysis"
+      ],
+      "image": "/young-man-graduate-student.jpg",
+      "slug": "marcus-johnson"
+    },
+    {
+      "name": "Priya Sharma",
+      "role": "PhD Candidate",
+      "expertise": [
+        "Disease Modeling",
+        "Statistical Methods"
+      ],
+      "image": "/young-woman-phd-student.jpg",
+      "slug": "priya-sharma"
+    },
+    {
+      "name": "David Kim",
+      "role": "Master's Student",
+      "expertise": [
+        "Algorithmic Trading",
+        "Machine Learning"
+      ],
+      "image": "/young-man-masters-student.jpg",
+      "slug": "david-kim"
+    },
+    {
+      "name": "Sofia Martinez",
+      "role": "Master's Student",
+      "expertise": [
+        "RNA Structure",
+        "Comparative Genomics"
+      ],
+      "image": "/young-woman-masters-student.jpg",
+      "slug": "sofia-martinez"
+    },
+    {
+      "name": "Alex Chen",
+      "role": "Research Assistant",
+      "expertise": [
+        "Data Analysis",
+        "Visualization"
+      ],
+      "image": "/young-person-research-assistant.jpg",
+      "slug": "alex-chen"
+    }
+  ],
+  "legacy_alumni": [
+    {
+      "name": "Emily Zhang",
+      "role": "PhD Candidate",
+      "expertise": [
+        "Viral Evolution",
+        "Bioinformatics"
+      ],
+      "image": "/young-woman-graduate-student.jpg",
+      "slug": "emily-zhang"
+    },
+    {
+      "name": "Marcus Johnson",
+      "role": "PhD Candidate",
+      "expertise": [
+        "Tumor Heterogeneity",
+        "Single-Cell Analysis"
+      ],
+      "image": "/young-man-graduate-student.jpg",
+      "slug": "marcus-johnson"
+    },
+    {
+      "name": "Priya Sharma",
+      "role": "PhD Candidate",
+      "expertise": [
+        "Disease Modeling",
+        "Statistical Methods"
+      ],
+      "image": "/young-woman-phd-student.jpg",
+      "slug": "priya-sharma"
+    },
+    {
+      "name": "David Kim",
+      "role": "Master's Student",
+      "expertise": [
+        "Algorithmic Trading",
+        "Machine Learning"
+      ],
+      "image": "/young-man-masters-student.jpg",
+      "slug": "david-kim"
+    },
+    {
+      "name": "Sofia Martinez",
+      "role": "Master's Student",
+      "expertise": [
+        "RNA Structure",
+        "Comparative Genomics"
+      ],
+      "image": "/young-woman-masters-student.jpg",
+      "slug": "sofia-martinez"
+    },
+    {
+      "name": "Alex Chen",
+      "role": "Research Assistant",
+      "expertise": [
+        "Data Analysis",
+        "Visualization"
+      ],
+      "image": "/young-person-research-assistant.jpg",
+      "slug": "alex-chen"
+    }
+  ],
+  "legacy_publications": [
+    {
+      "title": "Predictive frameworks for biocontainment expiration in engineered systems",
+      "authors": "Rodriguez M, Garcia J, Chen D",
+      "journal": "Nature Biotechnology",
+      "volume": "42(3)",
+      "pages": "412-428",
+      "doi": "10.1038/nbt.2024.123",
+      "type": "Article",
+      "year": "2024"
+    },
+    {
+      "title": "Evolutionary pathways to kill-switch failure in synthetic bacteria",
+      "authors": "Garcia J, Rodriguez M, Lopez A",
+      "journal": "Science Advances",
+      "volume": "10(8)",
+      "pages": "eabc1234",
+      "doi": "10.1126/sciadv.abc1234",
+      "type": "Article",
+      "year": "2024"
+    },
+    {
+      "title": "Experimental validation of kill-switch evolution predictions",
+      "authors": "Chen D, Garcia J, Rodriguez M",
+      "journal": "ACS Synthetic Biology",
+      "volume": "13(5)",
+      "pages": "1245-1258",
+      "doi": "10.1021/acssynbio.2024.00123",
+      "type": "Article",
+      "year": "2024"
+    },
+    {
+      "title": "Game-theoretic models of evolutionary escape in synthetic systems",
+      "authors": "Hernandez S, Rodriguez M",
+      "journal": "Journal of Theoretical Biology",
+      "volume": "572",
+      "pages": "111589",
+      "doi": "10.1016/j.jtbi.2024.111589",
+      "type": "Article",
+      "year": "2024"
+    },
+    {
+      "title": "Mathematical analysis of kill-switch evolutionary stability",
+      "authors": "Rodriguez M, Garcia J",
+      "journal": "PLOS Computational Biology",
+      "volume": "19(11)",
+      "pages": "e1011234",
+      "doi": "10.1371/journal.pcbi.1011234",
+      "type": "Article",
+      "year": "2023"
+    },
+    {
+      "title": "Population dynamics of engineered microorganisms under selection",
+      "authors": "Garcia J, Rodriguez M",
+      "journal": "Nature Communications",
+      "volume": "14",
+      "pages": "5678",
+      "doi": "10.1038/s41467-023-05678-x",
+      "type": "Article",
+      "year": "2023"
+    },
+    {
+      "title": "Network-based assessment of engineered organism spillover potential",
+      "authors": "Lopez A, Rodriguez M",
+      "journal": "Ecology Letters",
+      "volume": "26(4)",
+      "pages": "612-628",
+      "doi": "10.1111/ele.14234",
+      "type": "Article",
+      "year": "2023"
+    },
+    {
+      "title": "Engineering robust biocontainment in E. coli chassis strains",
+      "authors": "Chen D, Garcia J",
+      "journal": "Nature Biotechnology",
+      "volume": "41(9)",
+      "pages": "1234-1245",
+      "doi": "10.1038/nbt.2023.456",
+      "type": "Article",
+      "year": "2023"
+    },
+    {
+      "title": "Stochastic models for synthetic gene circuit degradation",
+      "authors": "Rodriguez M, Garcia J, Lopez A",
+      "journal": "Molecular Systems Biology",
+      "volume": "18(6)",
+      "pages": "e10876",
+      "doi": "10.15252/msb.202210876",
+      "type": "Article",
+      "year": "2022"
+    },
+    {
+      "title": "Ecological risk factors in synthetic biology release",
+      "authors": "Lopez A, Rodriguez M",
+      "journal": "Trends in Ecology & Evolution",
+      "volume": "37(8)",
+      "pages": "712-724",
+      "doi": "10.1016/j.tree.2022.05.008",
+      "type": "Review",
+      "year": "2022"
+    },
+    {
+      "title": "Biosecurity considerations in the age of AI-designed proteins",
+      "authors": "Rodriguez M, Chen D, Garcia J",
+      "journal": "Annual Review of Biomedical Engineering",
+      "volume": "24",
+      "pages": "389-415",
+      "doi": "10.1146/annurev-bioeng-092022-123456",
+      "type": "Review",
+      "year": "2022"
+    },
+    {
+      "title": "Bayesian approaches to containment uncertainty quantification",
+      "journal": "In preparation",
+      "year": "2025",
+      "authors": "",
+      "type": "In preparation",
+      "profile_source": "Carlos Martinez"
+    }
+  ],
+  "original_translations": {
+    "en": {
+      "nav": {
+        "home": "Home",
+        "research": "Research",
+        "members": "Members",
+        "publications": "Publications",
+        "consulting": "Consulting",
+        "contact": "Contact",
+        "language": "Language"
+      },
+      "home": {
+        "hero": {
+          "title": "Taming Risk Through",
+          "titleAccent": "Predictive Evolution",
+          "subtitle": "A research collective advancing mathematical and computational frameworks for containment strategies, evolutionary prediction, and risk assessment in synthetic biology, emerging pathogens, gain-of-function studies, financial markets, and AI autonomous algorithmic evolution",
+          "exploreResearch": "Explore Our Research",
+          "consultingServices": "Consulting Services"
+        },
+        "coreResearch": {
+          "title": "Core Research Areas",
+          "subtitle": "Combining theoretical evolutionary genetics with advanced mathematical modeling",
+          "containment": {
+            "title": "Containment Frameworks",
+            "description": "Mathematical models for setting containment expiration dates and assessing barrier integrity"
+          },
+          "killSwitch": {
+            "title": "Kill-Switch Evolution",
+            "description": "Predicting and preventing evolutionary escape from bacterial safety mechanisms"
+          },
+          "spillover": {
+            "title": "Spillover Risk Analysis",
+            "description": "Quantifying ecological and immunological interaction risks in novel systems"
+          },
+          "targets": {
+            "title": "Evolutionary Targets",
+            "description": "Identifying and monitoring specific evolutionary trajectories of concern"
+          }
+        },
+        "about": {
+          "title": "Leading Mathematical Biosecurity Research",
+          "p1": "Our research group brings together faculty, postdocs, and graduate students with expertise in theoretical evolutionary genetics and mathematical modeling, applying rigorous analytical methods to critical biosecurity challenges.",
+          "p2": "We collaborate with international partners to develop predictive frameworks that anticipate the near-future course of evolution in engineered biological systems, establishing new standards for quantitative risk assessment in synthetic biology.",
+          "meetTeam": "Meet Our Team",
+          "activeResearchers": "Active Researchers"
+        },
+        "cta": {
+          "title": "Partner with Our Research Group",
+          "subtitle": "Request information, schedule consultations, or discuss collaboration opportunities",
+          "getInTouch": "Get in Touch"
+        }
+      },
+      "members": {
+        "title": "Our Research Team",
+        "subtitle": "Internationally recognized experts in evolutionary genetics, mathematical modeling, and biosecurity",
+        "faculty": "Faculty",
+        "postdoc": "Postdoc",
+        "gradStudent": "Graduate Student",
+        "viewProfile": "View Profile"
+      },
+      "contact": {
+        "title": "Get in Touch",
+        "subtitle": "Contact us for research collaborations, consulting services, or general inquiries",
+        "form": {
+          "name": "Full Name",
+          "email": "Email Address",
+          "organization": "Organization",
+          "subject": "Subject",
+          "message": "Message",
+          "send": "Send Message",
+          "sending": "Sending..."
+        },
+        "info": {
+          "title": "Contact Information",
+          "address": "Address",
+          "addressDetails": "Evolutionary Risk Analytics\nResearch Division\nBerlin, Germany",
+          "email": "Email",
+          "phone": "Phone"
+        }
+      },
+      "consulting": {
+        "title": "Consulting Services",
+        "subtitle": "Expert guidance on biosecurity, containment strategies, and evolutionary risk assessment",
+        "services": {
+          "title": "Our Services",
+          "riskAssessment": {
+            "title": "Biosecurity Risk Assessment",
+            "description": "Comprehensive evaluation of containment systems and evolutionary escape probabilities for synthetic biology projects"
+          },
+          "containment": {
+            "title": "Containment Strategy Design",
+            "description": "Mathematical modeling to establish containment expiration dates and multi-layered safety protocols"
+          },
+          "evolutionary": {
+            "title": "Evolutionary Prediction",
+            "description": "Advanced forecasting of near-future evolutionary trajectories in engineered biological systems"
+          },
+          "regulatory": {
+            "title": "Regulatory Compliance",
+            "description": "Expert consultation on biosecurity regulations and safety standards for synthetic biology"
+          }
+        },
+        "process": {
+          "title": "Our Process",
+          "consultation": {
+            "title": "Initial Consultation",
+            "description": "We discuss your project requirements and biosecurity concerns"
+          },
+          "assessment": {
+            "title": "Assessment & Analysis",
+            "description": "Our team conducts comprehensive mathematical modeling and risk evaluation"
+          },
+          "recommendations": {
+            "title": "Recommendations",
+            "description": "We deliver detailed reports with actionable containment strategies"
+          },
+          "support": {
+            "title": "Ongoing Support",
+            "description": "Continued monitoring and consultation as your project evolves"
+          }
+        },
+        "pricing": {
+          "title": "Pricing & Packages",
+          "basic": {
+            "name": "Basic Assessment",
+            "price": "$5,000 USD",
+            "description": "Initial risk evaluation and containment review",
+            "features": [
+              "2-week turnaround",
+              "Written report",
+              "1 consultation session",
+              "Email support"
+            ]
+          },
+          "comprehensive": {
+            "name": "Comprehensive Analysis",
+            "price": "$15,000 USD",
+            "description": "In-depth modeling and multi-scenario assessment",
+            "features": [
+              "4-week engagement",
+              "Detailed mathematical models",
+              "3 consultation sessions",
+              "Priority support"
+            ],
+            "popular": "Most Popular"
+          },
+          "ongoing": {
+            "name": "Ongoing Partnership",
+            "price": "Custom",
+            "description": "Long-term collaboration and monitoring",
+            "features": [
+              "Custom timeline",
+              "Continuous monitoring",
+              "Unlimited consultations",
+              "Dedicated team"
+            ]
+          }
+        },
+        "cta": {
+          "title": "Ready to Get Started?",
+          "subtitle": "Contact us to discuss your project and receive a custom proposal",
+          "schedule": "Schedule Consultation",
+          "confidentiality": "All consultations are confidential and protected by NDAs"
+        }
+      },
+      "research": {
+        "title": "Research Focus",
+        "subtitle": "Advancing biosecurity through mathematical frameworks and evolutionary prediction",
+        "synbio": {
+          "title": "Synthetic Biology Context",
+          "description": "Synthetic biology enables precise engineering of biological systems, from modified bacteria to entirely novel organisms. While this field holds immense promise for medicine, agriculture, and environmental remediation, it also presents unique biosecurity challenges. Our research addresses the critical gap between engineered intent and evolutionary reality, developing mathematical frameworks to predict and prevent unintended consequences.",
+          "challenges": "Key Biosecurity Challenges",
+          "challenge1": "Evolutionary escape from designed containment systems",
+          "challenge2": "Gene transfer to natural organisms",
+          "challenge3": "Unexpected ecological interactions",
+          "challenge4": "Long-term stability of engineered traits"
+        },
+        "areas": {
+          "containment": {
+            "title": "Predictive Containment Frameworks",
+            "description": "We develop mathematical models to establish scientifically grounded expiration dates for containment measures. Our frameworks integrate mutation rates, selection pressures, and population dynamics to predict when engineered safeguards may fail.",
+            "approaches": "Key Approaches",
+            "approach1": "Stochastic modeling of evolutionary trajectories",
+            "approach2": "Multi-barrier containment optimization",
+            "approach3": "Temporal risk assessment algorithms"
+          },
+          "killSwitch": {
+            "title": "Kill-Switch Evolution",
+            "description": "Bacterial kill-switches are designed to eliminate engineered organisms outside controlled environments. However, evolutionary pressure can lead to escape mutants. Our research predicts mutation pathways and designs evolution-resistant safety mechanisms.",
+            "focus": "Research Focus",
+            "focus1": "Mutation rate analysis in safety circuits",
+            "focus2": "Selection pressure quantification",
+            "focus3": "Redundant kill-switch architecture"
+          },
+          "spillover": {
+            "title": "Spillover Risk Assessment",
+            "description": "We quantify the probability and impact of engineered organisms interacting with natural ecosystems or immune systems. Our models integrate ecological theory, immunology, and evolutionary genetics.",
+            "metrics": "Risk Metrics",
+            "metric1": "Horizontal gene transfer probabilities",
+            "metric2": "Immune system interaction modeling",
+            "metric3": "Ecological niche overlap analysis"
+          },
+          "interaction": {
+            "title": "Interaction Risk Modeling",
+            "description": "Complex interactions between engineered organisms and their environment can produce unexpected outcomes. We model immunological responses, ecological competition, and metabolic cross-talk.",
+            "areas": "Analysis Areas",
+            "area1": "Host immune response prediction",
+            "area2": "Microbial community dynamics",
+            "area3": "Metabolite exchange networks"
+          },
+          "targets": {
+            "title": "Evolutionary Targets of Concern",
+            "description": "Certain evolutionary pathways pose heightened biosecurity risks. We identify and monitor specific genetic targets that could lead to containment failure or increased virulence.",
+            "surveillance": "Surveillance Focus",
+            "target1": "Antibiotic resistance emergence",
+            "target2": "Virulence factor acquisition",
+            "target3": "Host range expansion mutations"
+          }
+        }
+      },
+      "publications": {
+        "title": "Publications",
+        "subtitle": "Recent research outputs and preprints",
+        "year": "Year",
+        "authors": "Authors",
+        "journal": "Journal",
+        "doi": "DOI",
+        "preprint": "Preprint",
+        "loading": "Loading publications...",
+        "noPublications": "No publications available at this time."
+      }
+    },
+    "es": {
+      "nav": {
+        "home": "Inicio",
+        "research": "Investigación",
+        "members": "Miembros",
+        "publications": "Publicaciones",
+        "consulting": "Consultoría",
+        "contact": "Contacto",
+        "language": "Idioma"
+      },
+      "home": {
+        "hero": {
+          "title": "Bioseguridad a Través de la",
+          "titleAccent": "Evolución Predictiva",
+          "subtitle": "Un colectivo de investigación que avanza marcos matemáticos para estrategias de contención, predicción evolutiva y evaluación de riesgos en biología sintética",
+          "exploreResearch": "Explorar Nuestra Investigación",
+          "consultingServices": "Servicios de Consultoría"
+        },
+        "coreResearch": {
+          "title": "Áreas Principales de Investigación",
+          "subtitle": "Combinando genética evolutiva teórica con modelado matemático avanzado",
+          "containment": {
+            "title": "Marcos de Contención",
+            "description": "Modelos matemáticos para establecer fechas de expiración de contención y evaluar la integridad de las barreras"
+          },
+          "killSwitch": {
+            "title": "Evolución de Interruptores de Seguridad",
+            "description": "Predicción y prevención del escape evolutivo de mecanismos de seguridad bacteriana"
+          },
+          "spillover": {
+            "title": "Análisis de Riesgo de Desbordamiento",
+            "description": "Cuantificación de riesgos de interacción ecológica e inmunológica en sistemas novedosos"
+          },
+          "targets": {
+            "title": "Objetivos Evolutivos",
+            "description": "Identificación y monitoreo de trayectorias evolutivas específicas de preocupación"
+          }
+        },
+        "about": {
+          "title": "Liderando la Investigación en Bioseguridad Matemática",
+          "p1": "Nuestro grupo de investigación reúne profesores, posdoctorados y estudiantes de posgrado con experiencia en genética evolutiva teórica y modelado matemático, aplicando métodos analíticos rigurosos a desafíos críticos de bioseguridad.",
+          "p2": "Colaboramos con socios internacionales para desarrollar marcos predictivos que anticipan el curso futuro cercano de la evolución en sistemas biológicos diseñados, estableciendo nuevos estándares para la evaluación cuantitativa de riesgos en biología sintética.",
+          "meetTeam": "Conoce a Nuestro Equipo",
+          "activeResearchers": "Investigadores Activos"
+        },
+        "cta": {
+          "title": "Asóciese con Nuestro Grupo de Investigación",
+          "subtitle": "Solicite información, programe consultas o discuta oportunidades de colaboración",
+          "getInTouch": "Póngase en Contacto"
+        }
+      },
+      "members": {
+        "title": "Nuestro Equipo de Investigación",
+        "subtitle": "Expertos reconocidos internacionalmente en genética evolutiva, modelado matemático y bioseguridad",
+        "faculty": "Profesorado",
+        "postdoc": "Posdoctorado",
+        "gradStudent": "Estudiante de Posgrado",
+        "viewProfile": "Ver Perfil"
+      },
+      "contact": {
+        "title": "Póngase en Contacto",
+        "subtitle": "Contáctenos para colaboraciones de investigación, servicios de consultoría o consultas generales",
+        "form": {
+          "name": "Nombre Completo",
+          "email": "Correo Electrónico",
+          "organization": "Organización",
+          "subject": "Asunto",
+          "message": "Mensaje",
+          "send": "Enviar Mensaje",
+          "sending": "Enviando..."
+        },
+        "info": {
+          "title": "Información de Contacto",
+          "address": "Dirección",
+          "addressDetails": "Evolutionary Risk Analytics\nResearch Division\nBerlin, Germany",
+          "email": "Correo Electrónico",
+          "phone": "Teléfono"
+        }
+      },
+      "consulting": {
+        "title": "Servicios de Consultoría",
+        "subtitle": "Orientación experta en bioseguridad, estrategias de contención y evaluación de riesgos evolutivos",
+        "services": {
+          "title": "Nuestros Servicios",
+          "riskAssessment": {
+            "title": "Evaluación de Riesgo de Bioseguridad",
+            "description": "Evaluación integral de sistemas de contención y probabilidades de escape evolutivo para proyectos de biología sintética"
+          },
+          "containment": {
+            "title": "Diseño de Estrategia de Contención",
+            "description": "Modelado matemático para establecer fechas de expiración de contención y protocolos de seguridad multicapa"
+          },
+          "evolutionary": {
+            "title": "Predicción Evolutiva",
+            "description": "Pronóstico avanzado de trayectorias evolutivas del futuro cercano en sistemas biológicos diseñados"
+          },
+          "regulatory": {
+            "title": "Cumplimiento Normativo",
+            "description": "Consultoría experta sobre regulaciones de bioseguridad y estándares de seguridad para biología sintética"
+          }
+        },
+        "process": {
+          "title": "Nuestro Proceso",
+          "consultation": {
+            "title": "Consulta Inicial",
+            "description": "Discutimos los requisitos de su proyecto y las preocupaciones de bioseguridad"
+          },
+          "assessment": {
+            "title": "Evaluación y Análisis",
+            "description": "Nuestro equipo realiza modelado matemático integral y evaluación de riesgos"
+          },
+          "recommendations": {
+            "title": "Recomendaciones",
+            "description": "Entregamos informes detallados con estrategias de contención accionables"
+          },
+          "support": {
+            "title": "Apoyo Continuo",
+            "description": "Monitoreo y consultoría continuos a medida que evoluciona su proyecto"
+          }
+        },
+        "pricing": {
+          "title": "Precios y Paquetes",
+          "basic": {
+            "name": "Evaluación Básica",
+            "price": "$5,000 USD",
+            "description": "Evaluación inicial de riesgos y revisión de contención",
+            "features": [
+              "Entrega en 2 semanas",
+              "Informe escrito",
+              "1 sesión de consulta",
+              "Soporte por correo electrónico"
+            ]
+          },
+          "comprehensive": {
+            "name": "Análisis Integral",
+            "price": "$15,000 USD",
+            "description": "Modelado en profundidad y evaluación de múltiples escenarios",
+            "features": [
+              "Compromiso de 4 semanas",
+              "Modelos matemáticos detallados",
+              "3 sesiones de consulta",
+              "Soporte prioritario"
+            ],
+            "popular": "Más Popular"
+          },
+          "ongoing": {
+            "name": "Asociación Continua",
+            "price": "Personalizado",
+            "description": "Colaboración y monitoreo a largo plazo",
+            "features": [
+              "Cronograma personalizado",
+              "Monitoreo continuo",
+              "Consultas ilimitadas",
+              "Equipo dedicado"
+            ]
+          }
+        },
+        "cta": {
+          "title": "¿Listo para Comenzar?",
+          "subtitle": "Contáctenos para discutir su proyecto y recibir una propuesta personalizada",
+          "schedule": "Programar Consulta",
+          "confidentiality": "Todas las consultas son confidenciales y protegidas por acuerdos de confidencialidad"
+        }
+      },
+      "research": {
+        "title": "Enfoque de Investigación",
+        "subtitle": "Avanzando la bioseguridad a través de marcos matemáticos y predicción evolutiva",
+        "synbio": {
+          "title": "Contexto de Biología Sintética",
+          "description": "La biología sintética permite la ingeniería precisa de sistemas biológicos, desde bacterias modificadas hasta organismos completamente novedosos. Si bien este campo tiene un enorme potencial para la medicina, la agricultura y la remediación ambiental, también presenta desafíos únicos de bioseguridad. Nuestra investigación aborda la brecha crítica entre la intención diseñada y la realidad evolutiva, desarrollando marcos matemáticos para predecir y prevenir consecuencias no deseadas.",
+          "challenges": "Desafíos Clave de Bioseguridad",
+          "challenge1": "Escape evolutivo de sistemas de contención diseñados",
+          "challenge2": "Transferencia de genes a organismos naturales",
+          "challenge3": "Interacciones ecológicas inesperadas",
+          "challenge4": "Estabilidad a largo plazo de rasgos diseñados"
+        },
+        "areas": {
+          "containment": {
+            "title": "Marcos de Contención Predictivos",
+            "description": "Desarrollamos modelos matemáticos para establecer fechas de expiración científicamente fundamentadas para medidas de contención. Nuestros marcos integran tasas de mutación, presiones de selección y dinámicas poblacionales para predecir cuándo las salvaguardas diseñadas pueden fallar.",
+            "approaches": "Enfoques Clave",
+            "approach1": "Modelado estocástico de trayectorias evolutivas",
+            "approach2": "Optimización de contención de múltiples barreras",
+            "approach3": "Algoritmos de evaluación de riesgo temporal"
+          },
+          "killSwitch": {
+            "title": "Evolución de Interruptores de Seguridad",
+            "description": "Los interruptores de seguridad bacterianos están diseñados para eliminar organismos diseñados fuera de entornos controlados. Sin embargo, la presión evolutiva puede conducir a mutantes de escape. Nuestra investigación predice vías de mutación y diseña mecanismos de seguridad resistentes a la evolución.",
+            "focus": "Enfoque de Investigación",
+            "focus1": "Análisis de tasa de mutación en circuitos de seguridad",
+            "focus2": "Cuantificación de presión de selección",
+            "focus3": "Arquitectura de interruptores de seguridad redundantes"
+          },
+          "spillover": {
+            "title": "Evaluación de Riesgo de Desbordamiento",
+            "description": "Cuantificamos la probabilidad e impacto de organismos diseñados que interactúan con ecosistemas naturales o sistemas inmunes. Nuestros modelos integran teoría ecológica, inmunología y genética evolutiva.",
+            "metrics": "Métricas de Riesgo",
+            "metric1": "Probabilidades de transferencia horizontal de genes",
+            "metric2": "Modelado de interacción del sistema inmune",
+            "metric3": "Análisis de superposición de nicho ecológico"
+          },
+          "interaction": {
+            "title": "Modelado de Riesgo de Interacción",
+            "description": "Las interacciones complejas entre organismos diseñados y su entorno pueden producir resultados inesperados. Modelamos respuestas inmunológicas, competencia ecológica y comunicación metabólica.",
+            "areas": "Áreas de Análisis",
+            "area1": "Predicción de respuesta inmune del huésped",
+            "area2": "Dinámica de comunidades microbianas",
+            "area3": "Redes de intercambio de metabolitos"
+          },
+          "targets": {
+            "title": "Objetivos Evolutivos de Preocupación",
+            "description": "Ciertas vías evolutivas plantean riesgos de bioseguridad elevados. Identificamos y monitoreamos objetivos genéticos específicos que podrían conducir a fallas de contención o aumento de virulencia.",
+            "surveillance": "Enfoque de Vigilancia",
+            "target1": "Emergencia de resistencia a antibióticos",
+            "target2": "Adquisición de factores de virulencia",
+            "target3": "Mutaciones de expansión del rango de huéspedes"
+          }
+        }
+      },
+      "publications": {
+        "title": "Publicaciones",
+        "subtitle": "Resultados de investigación recientes y preimpresiones",
+        "year": "Año",
+        "authors": "Autores",
+        "journal": "Revista",
+        "doi": "DOI",
+        "preprint": "Preimpresión",
+        "loading": "Cargando publicaciones...",
+        "noPublications": "No hay publicaciones disponibles en este momento."
+      }
+    },
+    "pt": {
+      "nav": {
+        "home": "Início",
+        "research": "Pesquisa",
+        "members": "Membros",
+        "publications": "Publicações",
+        "consulting": "Consultoria",
+        "contact": "Contato",
+        "language": "Idioma"
+      },
+      "home": {
+        "hero": {
+          "title": "Biossegurança Através da",
+          "titleAccent": "Evolução Preditiva",
+          "subtitle": "Um coletivo de pesquisa avançando estruturas matemáticas para estratégias de contenção, previsão evolutiva e avaliação de riscos em biologia sintética",
+          "exploreResearch": "Explore Nossa Pesquisa",
+          "consultingServices": "Serviços de Consultoria"
+        },
+        "coreResearch": {
+          "title": "Áreas Principais de Pesquisa",
+          "subtitle": "Combinando genética evolutiva teórica com modelagem matemática avançada",
+          "containment": {
+            "title": "Estruturas de Contenção",
+            "description": "Modelos matemáticos para definir datas de expiração de contenção e avaliar integridade de barreiras"
+          },
+          "killSwitch": {
+            "title": "Evolução de Interruptores de Segurança",
+            "description": "Previsão e prevenção de escape evolutivo de mecanismos de segurança bacteriana"
+          },
+          "spillover": {
+            "title": "Análise de Risco de Transbordamento",
+            "description": "Quantificação de riscos de interação ecológica e imunológica em sistemas novos"
+          },
+          "targets": {
+            "title": "Alvos Evolutivos",
+            "description": "Identificação e monitoramento de trajetórias evolutivas específicas de preocupação"
+          }
+        },
+        "about": {
+          "title": "Liderando a Pesquisa em Biossegurança Matemática",
+          "p1": "Nosso grupo de pesquisa reúne professores, pós-doutorandos e estudantes de pós-graduação com expertise em genética evolutiva teórica e modelagem matemática, aplicando métodos analíticos rigorosos a desafios críticos de biossegurança.",
+          "p2": "Colaboramos com parceiros internacionais para desenvolver estruturas preditivas que antecipam o curso futuro próximo da evolução em sistemas biológicos projetados, estabelecendo novos padrões para avaliação quantitativa de riscos em biologia sintética.",
+          "meetTeam": "Conheça Nossa Equipe",
+          "activeResearchers": "Pesquisadores Ativos"
+        },
+        "cta": {
+          "title": "Faça Parceria com Nosso Grupo de Pesquisa",
+          "subtitle": "Solicite informações, agende consultas ou discuta oportunidades de colaboração",
+          "getInTouch": "Entre em Contato"
+        }
+      },
+      "members": {
+        "title": "Nossa Equipe de Pesquisa",
+        "subtitle": "Especialistas reconhecidos internacionalmente em genética evolutiva, modelagem matemática e biossegurança",
+        "faculty": "Professor",
+        "postdoc": "Pós-doutorado",
+        "gradStudent": "Estudante de Pós-graduação",
+        "viewProfile": "Ver Perfil"
+      },
+      "contact": {
+        "title": "Entre em Contato",
+        "subtitle": "Entre em contato conosco para colaborações de pesquisa, serviços de consultoria ou consultas gerais",
+        "form": {
+          "name": "Nome Completo",
+          "email": "Endereço de E-mail",
+          "organization": "Organização",
+          "subject": "Assunto",
+          "message": "Mensagem",
+          "send": "Enviar Mensagem",
+          "sending": "Enviando..."
+        },
+        "info": {
+          "title": "Informações de Contato",
+          "address": "Endereço",
+          "addressDetails": "Evolutionary Risk Analytics\nDivisão de Pesquisa\nBerlim, Alemanha",
+          "email": "E-mail",
+          "phone": "Telefone"
+        }
+      },
+      "consulting": {
+        "title": "Serviços de Consultoria",
+        "subtitle": "Orientação especializada em biossegurança, estratégias de contenção e avaliação de riscos evolutivos",
+        "services": {
+          "title": "Nossos Serviços",
+          "riskAssessment": {
+            "title": "Avaliação de Risco de Biossegurança",
+            "description": "Avaliação abrangente de sistemas de contenção e probabilidades de escape evolutivo para projetos de biologia sintética"
+          },
+          "containment": {
+            "title": "Design de Estratégia de Contenção",
+            "description": "Modelagem matemática para estabelecer datas de expiração de contenção e protocolos de segurança multicamadas"
+          },
+          "evolutionary": {
+            "title": "Previsão Evolutiva",
+            "description": "Previsão avançada de trajetórias evolutivas de futuro próximo em sistemas biológicos projetados"
+          },
+          "regulatory": {
+            "title": "Conformidade Regulatória",
+            "description": "Consultoria especializada sobre regulamentações de biossegurança e padrões de segurança para biologia sintética"
+          }
+        },
+        "process": {
+          "title": "Nosso Processo",
+          "consultation": {
+            "title": "Consulta Inicial",
+            "description": "Discutimos os requisitos do seu projeto e preocupações com biossegurança"
+          },
+          "assessment": {
+            "title": "Avaliação e Análise",
+            "description": "Nossa equipe realiza modelagem matemática abrangente e avaliação de riscos"
+          },
+          "recommendations": {
+            "title": "Recomendações",
+            "description": "Entregamos relatórios detalhados com estratégias de contenção acionáveis"
+          },
+          "support": {
+            "title": "Suporte Contínuo",
+            "description": "Monitoramento e consultoria contínuos à medida que seu projeto evolui"
+          }
+        },
+        "pricing": {
+          "title": "Preços e Pacotes",
+          "basic": {
+            "name": "Avaliação Básica",
+            "price": "$5.000 USD",
+            "description": "Avaliação inicial de riscos e revisão de contenção",
+            "features": [
+              "Prazo de 2 semanas",
+              "Relatório escrito",
+              "1 sessão de consulta",
+              "Suporte por e-mail"
+            ]
+          },
+          "comprehensive": {
+            "name": "Análise Abrangente",
+            "price": "$15.000 USD",
+            "description": "Modelagem aprofundada e avaliação de múltiplos cenários",
+            "features": [
+              "Engajamento de 4 semanas",
+              "Modelos matemáticos detalhados",
+              "3 sessões de consulta",
+              "Suporte prioritário"
+            ],
+            "popular": "Mais Popular"
+          },
+          "ongoing": {
+            "name": "Parceria Contínua",
+            "price": "Personalizado",
+            "description": "Colaboração e monitoramento de longo prazo",
+            "features": [
+              "Cronograma personalizado",
+              "Monitoramento contínuo",
+              "Consultas ilimitadas",
+              "Equipe dedicada"
+            ]
+          }
+        },
+        "cta": {
+          "title": "Pronto para Começar?",
+          "subtitle": "Entre em contato conosco para discutir seu projeto e receber uma proposta personalizada",
+          "schedule": "Agendar Consulta",
+          "confidentiality": "Todas as consultas são confidenciais e protegidas por acordos de confidencialidade"
+        }
+      },
+      "research": {
+        "title": "Foco de Pesquisa",
+        "subtitle": "Avançando a biossegurança através de estruturas matemáticas e previsão evolutiva",
+        "synbio": {
+          "title": "Contexto de Biologia Sintética",
+          "description": "A biologia sintética permite a engenharia precisa de sistemas biológicos, desde bactérias modificadas até organismos completamente novos. Embora este campo tenha um enorme potencial para medicina, agricultura e remediação ambiental, também apresenta desafios únicos de biossegurança. Nossa pesquisa aborda a lacuna crítica entre intenção projetada e realidade evolutiva, desenvolvendo estruturas matemáticas para prever e prevenir consequências não intencionais.",
+          "challenges": "Principais Desafios de Biossegurança",
+          "challenge1": "Escape evolutivo de sistemas de contenção projetados",
+          "challenge2": "Transferência de genes para organismos naturais",
+          "challenge3": "Interações ecológicas inesperadas",
+          "challenge4": "Estabilidade a longo prazo de características projetadas"
+        },
+        "areas": {
+          "containment": {
+            "title": "Estruturas de Contenção Preditivas",
+            "description": "Desenvolvemos modelos matemáticos para estabelecer datas de expiração cientificamente fundamentadas para medidas de contenção. Nossas estruturas integram taxas de mutação, pressões de seleção e dinâmicas populacionais para prever quando as salvaguardas projetadas podem falhar.",
+            "approaches": "Principais Abordagens",
+            "approach1": "Modelagem estocástica de trajetórias evolutivas",
+            "approach2": "Otimização de contenção de múltiplas barreiras",
+            "approach3": "Algoritmos de avaliação de risco temporal"
+          },
+          "killSwitch": {
+            "title": "Evolução de Interruptores de Segurança",
+            "description": "Interruptores de segurança bacterianos são projetados para eliminar organismos projetados fora de ambientes controlados. No entanto, pressão evolutiva pode levar a mutantes de escape. Nossa pesquisa prevê vias de mutação e projeta mecanismos de segurança resistentes à evolução.",
+            "focus": "Foco de Pesquisa",
+            "focus1": "Análise de taxa de mutação em circuitos de segurança",
+            "focus2": "Quantificação de pressão de seleção",
+            "focus3": "Arquitetura de interruptores de segurança redundantes"
+          },
+          "spillover": {
+            "title": "Avaliação de Risco de Transbordamento",
+            "description": "Quantificamos a probabilidade e impacto de organismos projetados interagindo com ecossistemas naturais ou sistemas imunológicos. Nossos modelos integram teoria ecológica, imunologia e genética evolutiva.",
+            "metrics": "Métricas de Risco",
+            "metric1": "Probabilidades de transferência horizontal de genes",
+            "metric2": "Modelagem de interação do sistema imunológico",
+            "metric3": "Análise de sobreposição de nicho ecológico"
+          },
+          "interaction": {
+            "title": "Modelagem de Risco de Interação",
+            "description": "Interações complexas entre organismos projetados e seu ambiente podem produzir resultados inesperados. Modelamos respostas imunológicas, competição ecológica e comunicação metabólica.",
+            "areas": "Áreas de Análise",
+            "area1": "Previsão de resposta imune do hospedeiro",
+            "area2": "Dinâmica de comunidades microbianas",
+            "area3": "Redes de troca de metabólitos"
+          },
+          "targets": {
+            "title": "Alvos Evolutivos de Preocupação",
+            "description": "Certas vias evolutivas apresentam riscos elevados de biossegurança. Identificamos e monitoramos alvos genéticos específicos que podem levar a falhas de contenção ou aumento de virulência.",
+            "surveillance": "Foco de Vigilância",
+            "target1": "Emergência de resistência a antibióticos",
+            "target2": "Aquisição de fatores de virulência",
+            "target3": "Mutações de expansão do alcance do hospedeiro"
+          }
+        }
+      },
+      "publications": {
+        "title": "Publicações",
+        "subtitle": "Resultados de pesquisa recentes e pré-impressões",
+        "year": "Ano",
+        "authors": "Autores",
+        "journal": "Revista",
+        "doi": "DOI",
+        "preprint": "Pré-impressão",
+        "loading": "Carregando publicações...",
+        "noPublications": "Nenhuma publicação disponível no momento."
+      }
+    }
+  },
+  "provenance": {
+    "analytics": "evolutionary-risk-analytics(1).zip",
+    "lab": "lab-website-creation.zip",
+    "existing_site": "bio-cyber-security-agentics.philip-gerrish.chatgpt.site"
+  }
+}
