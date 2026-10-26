@@ -96,15 +96,17 @@ Re-run the installer after updating the publishing script. If the clone lives el
 
 ## Publishing
 
-Connect the hosting service to `pgerrish/BIOracle` and its `main` branch. The publish directory is `dist`. The committed output can be published directly. When a host runs a build, use `python3 scripts/build.py` with Python 3.9+, Node.js 18+, and the `BIORACLE_ARCHIVE_PASSWORD` build secret; no package-install step is necessary.
+The GitHub Pages workflow in `.github/workflows/deploy-pages.yml` publishes only the committed `dist/` directory when it changes on `main`. The BIOracle source repository stays private; the original archive files are not part of the Pages artifact. GitHub Pages sites are public even when their source repository is private. GitHub permits Pages from private repositories only on Pro, Team, or Enterprise plans. If this account is on Free, do not change this repository's visibility: publish `dist` from a separate public deployment repository instead.
 
-Set `BIORACLE_SITE_URL` to the final public root URL when building. It controls canonical URLs, social metadata, and the sitemap. If the URL contains a project path, the build prefixes navigation and asset URLs accordingly. For example:
+The project URL is `https://pgerrish.github.io/BIOracle/`. Before building, set `BIORACLE_SITE_URL` to that exact URL. It controls canonical URLs, social metadata, the sitemap, and the `/BIOracle/` asset/navigation prefix:
 
 ```sh
-BIORACLE_SITE_URL=https://pgerrish.github.io/BIOracle python3 scripts/build.py
+BIORACLE_SITE_URL=https://pgerrish.github.io/BIOracle/ python3 scripts/build.py
 ```
 
-The default URL remains the existing ChatGPT-hosted preview, `https://bioracle.philip-gerrish.chatgpt.site`. That preview is a separate deployment; pushing to this repository does not update it or publish a new public site until a hosting integration is connected.
+To finish enabling Pages, open `pgerrish/BIOracle` → Settings → Pages, choose **GitHub Actions** as the source, and save. The workflow then deploys `dist/` on the next `main` push or a manual workflow run. Pages from a private repository require an eligible GitHub plan. The separate ChatGPT-hosted deployment at `https://bioracle.philip-gerrish.chatgpt.site` is unchanged.
+
+For account confirmation and password reset links, add `https://pgerrish.github.io/BIOracle/business-model/` to the redirect URL allowlist in the Bioracle Supabase project's Auth URL settings. Public account email also requires configured SMTP. AI PDF analysis requires `OPENAI_API_KEY` in Supabase Edge Function secrets; the key must never be committed to this repository.
 
 ## Preserved content
 
