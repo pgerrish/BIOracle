@@ -1,0 +1,419 @@
+[
+  {
+    "title": "01 / Agreement and project",
+    "description": "Identify the agreement and its duration. Dates are entered explicitly; no agreement is signed by this form.",
+    "fields": [
+      {
+        "name": "agreementType",
+        "label": "Agreement type",
+        "type": "select",
+        "options": [
+          [
+            "contract",
+            "Research services contract"
+          ],
+          [
+            "grant",
+            "Sponsored research agreement"
+          ]
+        ],
+        "required": true
+      },
+      {
+        "name": "reference",
+        "label": "Agreement reference",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "projectTitle",
+        "label": "Project title",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "effectiveDate",
+        "label": "Effective date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "name": "startDate",
+        "label": "Project start date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "name": "endDate",
+        "label": "Project end date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "name": "awardId",
+        "label": "Award or grant reference",
+        "type": "text",
+        "grantOnly": true,
+        "required": false
+      },
+      {
+        "name": "awardTerms",
+        "label": "Award conditions and incorporated documents",
+        "type": "textarea",
+        "grantOnly": true,
+        "hint": "Identify the award, version/date, restrictions, reporting, and required flow-down terms. Include the operative requirements or identify the documents both parties will receive. This draft does not replace a sponsor’s award instrument.",
+        "maxLength": 6000,
+        "required": false
+      }
+    ]
+  },
+  {
+    "title": "02 / The parties",
+    "description": "Use the actual legal entities and authorized signatories, not just trading names. Notice addresses appear in the agreement.",
+    "fields": [
+      {
+        "name": "providerName",
+        "label": "BIOracle contracting legal entity",
+        "type": "text",
+        "hint": "Enter the full registered name of the entity signing for BIOracle.",
+        "required": true
+      },
+      {
+        "name": "sponsorName",
+        "label": "Client or sponsor legal entity",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "providerAddress",
+        "label": "BIOracle legal / notice address",
+        "type": "textarea",
+        "maxLength": 1000,
+        "required": false
+      },
+      {
+        "name": "sponsorAddress",
+        "label": "Client or sponsor legal / notice address",
+        "type": "textarea",
+        "maxLength": 1000,
+        "required": false
+      },
+      {
+        "name": "providerSigner",
+        "label": "BIOracle signatory name",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "sponsorSigner",
+        "label": "Client or sponsor signatory name",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "providerTitle",
+        "label": "BIOracle signatory title",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "sponsorTitle",
+        "label": "Client or sponsor signatory title",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "providerEmail",
+        "label": "BIOracle notice email",
+        "type": "email",
+        "required": false
+      },
+      {
+        "name": "sponsorEmail",
+        "label": "Client or sponsor notice email",
+        "type": "email",
+        "required": false
+      }
+    ]
+  },
+  {
+    "title": "03 / Scope and delivery",
+    "description": "Be specific enough for both parties to know what work is included, when it is due, and how it will be assessed.",
+    "fields": [
+      {
+        "name": "projectLead",
+        "label": "Research / project lead",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "scope",
+        "label": "Scope of work and exclusions",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "name": "deliverables",
+        "label": "Deliverables and formats",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "name": "milestones",
+        "label": "Milestones and due dates",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "name": "acceptance",
+        "label": "Acceptance criteria and review process",
+        "type": "textarea",
+        "hint": "State the review deadline, objective criteria, rejection procedure, and any correction period.",
+        "required": false
+      },
+      {
+        "name": "clientInputs",
+        "label": "Client inputs, access, and dependencies",
+        "type": "textarea",
+        "required": false
+      }
+    ]
+  },
+  {
+    "title": "04 / Funding and allocation",
+    "description": "Budget details are optional. Use a decimal point and no thousands separators. When all allocations and the total are supplied, they must balance.",
+    "fields": [
+      {
+        "name": "currency",
+        "label": "Currency",
+        "type": "select",
+        "options": [
+          [
+            "USD",
+            "USD"
+          ],
+          [
+            "MXN",
+            "MXN"
+          ],
+          [
+            "EUR",
+            "EUR"
+          ],
+          [
+            "GBP",
+            "GBP"
+          ],
+          [
+            "CAD",
+            "CAD"
+          ],
+          [
+            "AUD",
+            "AUD"
+          ]
+        ],
+        "required": false
+      },
+      {
+        "name": "totalBudget",
+        "label": "Total project budget",
+        "type": "money",
+        "required": false
+      },
+      {
+        "name": "studentBudget",
+        "label": "Graduate-student support allocation",
+        "type": "money",
+        "hint": "Enter an allocation if agreed; otherwise the PDF marks student support as to be agreed.",
+        "required": false
+      },
+      {
+        "name": "researchBudget",
+        "label": "Investigator / research-team allocation",
+        "type": "money",
+        "required": false
+      },
+      {
+        "name": "directBudget",
+        "label": "Other direct project costs",
+        "type": "money",
+        "required": false
+      },
+      {
+        "name": "adminBudget",
+        "label": "Administration / indirect costs",
+        "type": "money",
+        "required": false
+      },
+      {
+        "name": "taxTerms",
+        "label": "Taxes",
+        "type": "select",
+        "options": [
+          [
+            "included",
+            "Applicable taxes included in total"
+          ],
+          [
+            "additional",
+            "Legally applicable taxes separately itemized"
+          ]
+        ],
+        "required": false
+      },
+      {
+        "name": "paymentSchedule",
+        "label": "Funding and invoice schedule",
+        "type": "textarea",
+        "hint": "Specify advance or milestone amounts and dates, invoice triggers, and any final reconciliation or refund arrangements.",
+        "required": false
+      },
+      {
+        "name": "invoiceDays",
+        "label": "Invoice payment deadline (calendar days)",
+        "type": "number",
+        "min": 1,
+        "required": false
+      },
+      {
+        "name": "budgetApprover",
+        "label": "Budget approver and role",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "approvalDays",
+        "label": "Complete-request approval target (business days)",
+        "type": "number",
+        "min": 1,
+        "max": 90,
+        "required": false
+      },
+      {
+        "name": "disbursementDays",
+        "label": "Approved-payment processing target (business days)",
+        "type": "number",
+        "min": 1,
+        "max": 90,
+        "required": false
+      }
+    ]
+  },
+  {
+    "title": "05 / Graduate-student support",
+    "description": "Define the funded commitments and who is responsible for them. Do not enter bank details, tax identifiers, or other sensitive personal information.",
+    "fields": [
+      {
+        "name": "academicSupervisor",
+        "label": "Academic supervisor and role",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "studentPlan",
+        "label": "Student roles, support, and payment plan",
+        "type": "textarea",
+        "hint": "Include number of students or roles, period and rate of support, tuition/benefits if applicable, appointment or payment mechanism, payment dates, supervision, and how existing commitments are handled if funding is delayed.",
+        "required": false
+      }
+    ]
+  },
+  {
+    "title": "06 / Rights and legal terms",
+    "description": "These provisions depend on the parties, jurisdiction, and sponsor. Specify the intended terms; obtain legal review before signature.",
+    "fields": [
+      {
+        "name": "governingLaw",
+        "label": "Governing law (country and state / region)",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "disputeForum",
+        "label": "Courts / dispute venue",
+        "type": "text",
+        "hint": "Identify the agreed court location and jurisdiction; this template uses negotiation followed by court proceedings.",
+        "required": false
+      },
+      {
+        "name": "ipModel",
+        "label": "Ownership of project results",
+        "type": "select",
+        "options": [
+          [
+            "provider",
+            "BIOracle entity owns results; client receives an internal-use license"
+          ],
+          [
+            "client",
+            "Client owns project deliverables after full payment"
+          ],
+          [
+            "custom",
+            "Custom ownership and licensing terms below"
+          ]
+        ],
+        "required": false
+      },
+      {
+        "name": "ipDetails",
+        "label": "IP, background materials, software, and license terms",
+        "type": "textarea",
+        "hint": "Identify background IP, third-party restrictions, invention rights, and any agreed licenses. Missing terms remain to be agreed.",
+        "required": false
+      },
+      {
+        "name": "publicationTerms",
+        "label": "Publication and academic-use terms",
+        "type": "textarea",
+        "hint": "Specify publication rights, sponsor review periods, confidentiality or patent delays, and student thesis rights.",
+        "required": false
+      },
+      {
+        "name": "confidentialityYears",
+        "label": "Confidentiality period after termination (years)",
+        "type": "number",
+        "min": 1,
+        "max": 20,
+        "required": false
+      },
+      {
+        "name": "dataTerms",
+        "label": "Data handling and security obligations",
+        "type": "textarea",
+        "hint": "Describe permitted data, access, retention/deletion, incident notification, and applicable privacy or ethics requirements. Enter “No personal or regulated data permitted” if appropriate.",
+        "required": false
+      },
+      {
+        "name": "terminationDays",
+        "label": "Termination-for-convenience notice (calendar days)",
+        "type": "number",
+        "min": 1,
+        "required": false
+      },
+      {
+        "name": "cureDays",
+        "label": "Material-breach cure period (calendar days)",
+        "type": "number",
+        "min": 1,
+        "required": false
+      },
+      {
+        "name": "liabilityCap",
+        "label": "Agreed aggregate liability cap",
+        "type": "money",
+        "hint": "Enter an agreed positive cap in the project currency, or leave blank for a to-be-agreed placeholder.",
+        "required": false
+      },
+      {
+        "name": "specialTerms",
+        "label": "Additional negotiated terms",
+        "type": "textarea",
+        "required": false,
+        "hint": "Identify any clause being modified. Do not include signatures or sensitive credentials.",
+        "maxLength": 6000
+      }
+    ]
+  }
+]

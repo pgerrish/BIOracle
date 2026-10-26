@@ -1,5 +1,34 @@
 'use strict';
 
+// Offset the page-attached wallpaper by half the scroll distance, so its
+// apparent movement through the viewport is 50% of the content's movement.
+(() => {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let frame = null;
+
+  function paintParallax() {
+    frame = null;
+    const offset = reducedMotion.matches ? 0 : Math.max(0, window.scrollY) * .5;
+    document.body.style.setProperty('--sketch-parallax', `${offset}px`);
+  }
+
+  function queueParallax() {
+    if (!reducedMotion.matches && frame === null) {
+      frame = window.requestAnimationFrame(paintParallax);
+    }
+  }
+
+  function synchronizeParallax() {
+    if (frame !== null) window.cancelAnimationFrame(frame);
+    paintParallax();
+  }
+
+  window.addEventListener('scroll', queueParallax, {passive: true});
+  window.addEventListener('pageshow', synchronizeParallax);
+  reducedMotion.addEventListener('change', synchronizeParallax);
+  synchronizeParallax();
+})();
+
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.getElementById('navigation');
 function closeMenu() {
@@ -19,7 +48,7 @@ document.addEventListener('keydown', event => {
     menuButton.focus();
   }
 });
-window.matchMedia('(min-width: 821px)').addEventListener('change', closeMenu);
+window.matchMedia('(min-width: 1201px)').addEventListener('change', closeMenu);
 
 const notification = document.getElementById('notification');
 let notificationTimer;

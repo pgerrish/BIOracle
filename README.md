@@ -18,9 +18,23 @@ The SSH URL matches the existing Mac GitHub workflow. Alternatively, clone `pger
 
 ## Edit and preview
 
+The `/about/` page presents BIOracle's mission, its entrepreneurship/research/teaching model, and its three scientific foundations. Edit its text in the `about()` function in `scripts/build.py`. About appears in the main navigation, footer, and sitemap.
+
+The opening About block links to the full mission statement at `/mission/` in a new tab or window. Edit it in `mission()` in `scripts/build.py`; it discusses student preparedness, rapid change, and the Academy's planned weekly faculty–student brainstorming meetings.
+
+The same block links to `/business-model/`, which explains a proposed funding framework and provides a contract PDF generator. The page copy is in `scripts/business_model.py`; fields are defined in `content/contract-fields.json`. Allocation amounts, institutional identity, payment deadlines, governing law, IP arrangements, and other project-specific terms are entered by the user rather than asserted as established BIOracle policy.
+
+The generator supports research-services and sponsored-research drafts. Only five fields are required: agreement type, project title, provider legal entity, client/sponsor legal entity, and scope. They are marked by accessible red asterisks. Optional blanks receive explicit “to be agreed” placeholders in the PDF. Supplied dates and amounts are validated; the budget must balance when all allocations and the total are supplied. Award-specific fields remain optional for drafting. The PDF includes 14 numbered sections, the entered project terms, financial and student-support provisions, IP, confidentiality, termination, dispute terms, and unsigned signature blocks. It is a template for legal review, not a grant-award instrument or an executed agreement.
+
+`dist/contract-core.js` builds and paginates the PDF; `dist/contract-form.js` handles the form and download. PDF-lib 1.17.1 is vendored locally under `dist/vendor/`, with its MIT license; visitors do not need an external service or a server to generate the PDF. PDF generation remains in the browser. When logged in, raw form answers are automatically saved to the user’s private Supabase account draft; signed-out entries remain only in the open page until login. Passwords and session tokens are never stored in the draft. The generator remains disabled if JavaScript or the PDF library does not load. Standard PDF fonts support Latin-script names and punctuation; unsupported characters produce an explicit field error instead of being omitted from the contract.
+
+Run `node --test scripts/test_contract.cjs` for contract checks. It also creates a fictional review sample at `output/pdf/business-model-example-contract.pdf` and a long-text stress sample under `tmp/pdfs/`. These use illustrative terms, not adopted BIOracle policies. Only `dist` is published. Funding-policy background for U.S. federal awards is linked to the official [2 CFR Part 200 cost principles](https://www.govinfo.gov/content/pkg/CFR-2026-title2-vol01/xhtml/CFR-2026-title2-vol01-part200-subpartE.html); other jurisdictions and award conditions need their own review.
+
+Account login and autosave are implemented using the locally vendored Supabase SDK. The separate `$0/month` `bioracle` project is connected in the `pjg_music` organization; its RLS-protected private-draft schema is installed. Public sign-ups require Supabase email confirmations, so configure a production SMTP sender and the exact Auth redirect URLs before enabling general registration. See [account setup and verification](docs/accounts-and-drafts.md). Run `node --test scripts/test_accounts.cjs scripts/test_draft_sync.cjs` for local auth-dialog and autosave state-machine checks.
+
 Edit `content/site.json` and `scripts/build.py` for page content and structure. The stylesheet and browser interactions are in `dist/styles.css` and `dist/site.js`.
 
-Python 3.9 or later is sufficient; no third-party packages or Node installation are required. Install the global preview command once:
+Previewing requires Python 3.9 or later. Rebuilding also requires Node.js 18 or later for native archive encryption; no third-party packages are required. Install the global preview command once:
 
 ```sh
 bash scripts/install-preview-command.sh
@@ -82,7 +96,7 @@ Re-run the installer after updating the publishing script. If the clone lives el
 
 ## Publishing
 
-Connect the hosting service to `pgerrish/BIOracle` and its `main` branch. The publish directory is `dist`. When a host runs a build, use `python3 scripts/build.py`; no dependency-install step is necessary.
+Connect the hosting service to `pgerrish/BIOracle` and its `main` branch. The publish directory is `dist`. The committed output can be published directly. When a host runs a build, use `python3 scripts/build.py` with Python 3.9+, Node.js 18+, and the `BIORACLE_ARCHIVE_PASSWORD` build secret; no package-install step is necessary.
 
 Set `BIORACLE_SITE_URL` to the final public root URL when building. It controls canonical URLs, social metadata, and the sitemap. If the URL contains a project path, the build prefixes navigation and asset URLs accordingly. For example:
 
@@ -94,27 +108,28 @@ The default URL remains the existing ChatGPT-hosted preview, `https://bioracle.p
 
 ## Preserved content
 
-The original archives are preserved intact in `dist/assets/analytics-source.zip` and `dist/assets/lab-source.zip`. Unconfirmed template records are contextualized under `/archive/` and are excluded from the public sitemap. The main consortium contains the eight supplied named faculty members. Original translations are retained in `content/site.json` and the downloadable source material.
+The original archives are preserved intact in `content/archive/analytics-source.zip` and `content/archive/lab-source.zip`. Encrypted downloads are published under `dist/archive/downloads/`; plaintext originals are outside the publish directory. Unconfirmed template records are contextualized under `/archive/` and are excluded from the public sitemap. The main consortium contains the eight supplied named faculty members. Original translations are retained in `content/site.json` and the password-protected downloadable source material.
 
 The contact form prepares an email draft for the visitor to review and send, and includes a copy-inquiry fallback. It does not claim to submit messages to a backend.
 
+## Archive password protection
+
+The archive index, all archive profile pages, and its ZIP, JSON, and bibliography downloads are encrypted with AES-256-GCM. The password derives the key using PBKDF2-SHA-256 with 600,000 iterations and a random salt. Published HTML contains only the password form; the password and build key are never included in `dist`. Browsers unlock it using [Web Crypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/deriveKey) over HTTPS or the localhost preview.
+
+Unlocking remembers the derived key in session storage for the current tab. “Lock archive” clears it. Disabling JavaScript or following a direct profile/download URL does not reveal plaintext archive content.
+
+The current local build is configured. On a fresh clone, set `BIORACLE_ARCHIVE_PASSWORD` to the archive password for the first build. The build saves a private key file in `.env.archive` (ignored by Git and outside `dist`); subsequent local builds can reuse it without the environment variable. To change the password, supply a new value and rebuild, then deploy the entire updated `dist` folder. Hosting builds need the password supplied as a build secret. Missing configuration stops the build rather than publishing an unprotected archive.
+
+Run the archive checks with `BIORACLE_ARCHIVE_PASSWORD` set: `node --test scripts/test_archive.cjs`. Checks cover correct and incorrect passwords, tamper detection, every archive route, downloads, tab access, locking, and absence of plaintext secrets in published files.
+
+Publish only `dist`, and remove the old public `/assets/analytics-source.zip`, `/assets/lab-source.zip`, `/assets/source-records.json`, and `/assets/source-publications.bib` from an existing deployment when updating. This protects the static website, not the repository's source/history or copies already downloaded. Static encryption cannot rate-limit offline password guesses; it is not a replacement for server access control for confidential records.
+
 ## Artwork
 
-Eight original backgrounds use heavy gray graphite and dark forest-green pencil on pale ivory, with spare surreal forms and generous empty space. Each main page has its own artwork:
+The active background is `dist/assets/scattered-pencil-evolution-equations.webp`: varied coarse gray-and-dark-green pencil caricatures of viruses, bacteriophages, proteins, immune cells, flagellated and dividing bacteria, financial plots, and AI bots, with handwritten Fisher and Price equations. The wallpaper is displayed at 25% opacity over a soft forest-green solid background (`#d8e5dd`), with sketches another 20% smaller than the preceding version, with stable page-specific placement and 50% scroll-speed parallax. The homepage headline reads “Evolution is the hammer.” on one line.
 
-| Page | Study |
-| --- | --- |
-| Home | DNA and variation |
-| Research | Folding proteins |
-| Approach | Mathematical trajectories |
-| Consortium | Bacteria and connection |
-| Consulting | Evolving market charts |
-| Publications | Abstract viruses |
-| Contact | Evolving AI bots |
-| Source archive | Evolutionary forms |
+Small labels, navigation, captions, and supporting text use larger type throughout, including responsive layouts. Text sections sit on subtle liquid-glass surfaces defined in `dist/atmosphere.css`, with translucent highlights, soft blur, and restrained borders. More opaque fallbacks support browsers without backdrop filtering and visitors who request reduced transparency. Decorative artwork is applied through CSS and is absent from the accessibility tree.
 
-Full-resolution PNGs are in `artwork/originals/`; optimized WebP versions are in `dist/assets/artwork/`. The built-in image-generation tool was used for all eight pieces. Complete prompts and page assignments are preserved in `artwork/prompts.json`. Detail pages use the study matching their research topic or parent section. The generator sets the decorative background and social preview image for each page; the stylesheet adjusts the artwork's scale and opacity for smaller screens.
+The built-in image-generation tool created the background. The full prompt and implementation notes are in [docs/scattered-pencil-glass.md](docs/scattered-pencil-glass.md). The preceding `dist/assets/scattered-pencil-caricatures.webp` and `dist/assets/scattered-pencil-science.webp` wallpapers, the earlier `dist/assets/evolution-pencil.webp` illustration and all eight studies in `artwork/originals/` and `dist/assets/artwork/` remain available.
 
-The earlier graphite illustration is retained as `dist/assets/evolution-pencil.webp`.
-
-The supplied BIOracle logo and researcher photographs are retained. Font licensing is included in `dist/assets/font-license.txt`.
+The logo symbol uses the original blue-toned image, `dist/assets/bioracle-logo.png`, throughout the site at the current enlarged size; the HTML wordmark is unchanged. The green variant, `dist/assets/bioracle-logo-green.webp`, and its [edit prompt](docs/bioracle-logo-green-prompt.md) are retained. Researcher photographs are preserved. Font licensing is included in `dist/assets/font-license.txt`.

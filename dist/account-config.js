@@ -1,0 +1,1 @@
+window.BIOracleAccountConfig = {"supabaseUrl": "https://mrlxvxwxwayffzwcdaaw.supabase.co", "publishableKey": "sb_publishable_j4y_xtxW6NUOa-c1F87WtA_L-hFIMMt", "basePath": ""};
