@@ -88,7 +88,17 @@
         "name": "providerAddress",
         "label": "BIOracle legal / notice address",
         "type": "textarea",
+        "hint": "Enter BIOracle's New Mexico street or mailing address. This address appears in the agreement header and notice section.",
+        "default": "Center for Evolutionary and Theoretical Immunology\nUniversity of New Mexico\nAlbuquerque, NM 87131",
         "maxLength": 1000,
+        "required": false
+      },
+      {
+        "name": "providerPhone",
+        "label": "BIOracle office phone (New Mexico)",
+        "type": "tel",
+        "default": "+1.505.695.2770",
+        "maxLength": 40,
         "required": false
       },
       {

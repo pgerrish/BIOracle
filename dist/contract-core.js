@@ -54,7 +54,7 @@
     const result = {};
     for (const field of schema.flatMap(group => group.fields)) {
       const value = String(data[field.name] || '').trim().normalize('NFC');
-      result[field.name] = value || `[${field.label} to be agreed]`;
+      result[field.name] = value || field.default || `[${field.label} to be agreed]`;
     }
     result.currency = String(data.currency || '').trim() || '[Currency to be agreed]';
     result.reference = String(data.reference || '').trim() || 'DRAFT - reference to be assigned';
@@ -72,7 +72,7 @@
     const field = (label, text) => blocks.push({kind:'field', label, text});
     h('1. Parties, purpose, and term');
     p(`This ${grant ? 'Sponsored Research Agreement' : 'Research Services Agreement'} (Agreement), reference ${d.reference}, is proposed between ${d.providerName} (Provider), acting for BIOracle, and ${d.sponsorName} (Sponsor), effective ${d.effectiveDate}, subject to execution by both parties. The project is ${d.projectTitle}. The performance period is ${d.startDate} through ${d.endDate}, unless extended or terminated under this Agreement.`);
-    field('Provider address and notices', `${d.providerAddress}\nAttention: ${d.providerSigner}, ${d.providerTitle}\nEmail: ${d.providerEmail}`);
+    field('Provider address and notices', `${d.providerAddress}\nPhone: ${d.providerPhone}\nAttention: ${d.providerSigner}, ${d.providerTitle}\nEmail: ${d.providerEmail}`);
     field('Sponsor address and notices', `${d.sponsorAddress}\nAttention: ${d.sponsorSigner}, ${d.sponsorTitle}\nEmail: ${d.sponsorEmail}`);
     field('Project lead', d.projectLead);
     if (grant) {
@@ -138,7 +138,7 @@
     return blocks;
   }
 
-  async function generate(data, schema, PDFLib) {
+  async function generate(data, schema, PDFLib, logoBytes) {
     const entered = Object.fromEntries(Object.entries(data).map(([k, v]) => [k, String(v).trim().normalize('NFC')]));
     const errors = validate(entered, schema);
     if (errors.length) { const error = new Error('Please correct the contract fields.'); error.fields = errors; throw error; }
@@ -147,6 +147,7 @@
     const doc = await PDFDocument.create();
     const font = await doc.embedFont(StandardFonts.Helvetica);
     const bold = await doc.embedFont(StandardFonts.HelveticaBold);
+    const logo = logoBytes ? await doc.embedPng(logoBytes) : null;
     const clean = value => String(value).replace(/[\u2010-\u2015]/g, '-').replace(/\t/g, '    ');
     // Fail visibly rather than dropping names or unsupported characters from a legal document.
     for (const group of schema) for (const field of group.fields) {
@@ -165,12 +166,21 @@
     const ink = rgb(.13,.18,.16), green = rgb(.21,.37,.32), muted = rgb(.38,.42,.40);
     const layout = [];
     let page, y;
+    const addressLines = String(d.providerAddress || '[New Mexico address to be agreed]').split(/\r?\n/);
+    const contactLine = addressLines.join(', ').replace(/\s+/g, ' ').replace(/\u2010|\u2011|\u2012|\u2013|\u2014/g, '-');
+    const contactLine2 = [d.providerPhone || '[New Mexico phone to be agreed]',d.providerEmail || '[BIOracle email to be agreed]'].join('  | ');
     function newPage() {
       page = doc.addPage([width, height]);
-      page.drawText('BIORACLE  /  AGREEMENTS', {x:margin, y:height - 35, size:9, font:bold, color:green});
-      page.drawText('DRAFT - FOR REVIEW', {x:width - margin - bold.widthOfTextAtSize('DRAFT - FOR REVIEW', 9), y:height - 35, size:9, font:bold, color:muted});
-      page.drawLine({start:{x:margin,y:height - 47}, end:{x:width - margin,y:height - 47}, thickness:.6,color:rgb(.79,.83,.80)});
-      y = height - 76;
+      if (logo) page.drawImage(logo,{x:margin,y:height-92,width:76,height:76});
+      const brandX = margin + (logo ? 88 : 0);
+      page.drawText('DRAFT - FOR REVIEW', {x:width - margin - bold.widthOfTextAtSize('DRAFT - FOR REVIEW', 8), y:height - 18, size:8, font:bold, color:muted});
+      const contactMax = width - margin - brandX;
+      let contactSize = 7.2;
+      while (contactSize > 5 && font.widthOfTextAtSize(contactLine,contactSize) > contactMax) contactSize -= .2;
+      page.drawText(contactLine,{x:brandX,y:height-37,size:contactSize,font,color:muted,maxWidth:contactMax});
+      page.drawText(contactLine2,{x:brandX,y:height-52,size:7.2,font,color:muted,maxWidth:contactMax});
+      page.drawLine({start:{x:margin,y:height - 103}, end:{x:width - margin,y:height - 103}, thickness:.6,color:rgb(.79,.83,.80)});
+      y = height - 129;
     }
     function ensure(space) { if (y - space < 62) newPage(); }
     function wrap(value, face, size, maxWidth = bodyWidth) {
@@ -236,7 +246,7 @@
     for (let i = 0; i < pageCount; i++) {
       const current = doc.getPage(i);
       current.drawLine({start:{x:margin,y:48},end:{x:width - margin,y:48},thickness:.5,color:rgb(.79,.83,.80)});
-      current.drawText('BIOracle | Unsigned agreement draft', {x:margin,y:32,size:8,font,color:muted});
+      current.drawText('BIOracle  ·  Unsigned draft for review', {x:margin,y:32,size:8,font,color:muted});
       const number = `Page ${i + 1} of ${pageCount}`;
       current.drawText(number,{x:width - margin - font.widthOfTextAtSize(number,8),y:32,size:8,font,color:muted});
     }

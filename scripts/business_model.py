@@ -1,4 +1,4 @@
-"""Business-model page and accessible contract form, driven by a shared schema."""
+"""Business-model and contract pages, with the contract form driven by a shared schema."""
 import json
 from html import escape
 from pathlib import Path
@@ -9,7 +9,7 @@ SCHEMA = json.loads((Path(__file__).resolve().parents[1] / 'content/contract-fie
 def render_business_model():
     content = '''<section class="page-intro wrap"><p class="eyebrow">BIOracle / Our business model</p>
       <h1>Fund the work.<br><em>Support the people.</em></h1>
-      <div class="intro-bottom"><p class="lead">A proposed framework for moving grants and contracts into research promptly, with graduate-student support written into the budget from the beginning.</p><a class="text-link" href="#contract-builder">Construct a contract <span aria-hidden="true">↓</span></a></div></section>
+      <div class="intro-bottom"><p class="lead">A proposed framework for moving grants and contracts into research promptly, with graduate-student support written into the budget from the beginning.</p><a class="text-link" href="/contract/">Contract <span aria-hidden="true">↓</span></a></div></section>
       <section class="wrap section business-model-copy" aria-labelledby="funding-title">
         <p class="eyebrow">The operating model</p><h2 id="funding-title">Clear allocations.<br><em>Shorter paths to the work.</em></h2>
         <p class="body-copy">Our aim is to reduce administrative delay while sustaining rigorous research and meaningful opportunities for graduate students. The framework below is a proposal: allocation amounts, approval deadlines, and legal terms must be agreed for each project. It does not announce fixed institutional percentages.</p>
@@ -21,12 +21,29 @@ def render_business_model():
         </div>
         <div class="about-note"><h3>Grants and contracts have different constraints.</h3><p>A commercial contract sets an agreed price and scope. A sponsored research award may restrict eligible costs, indirect costs, student appointments, reporting, and transfers between budget categories. Award conditions and applicable law govern those decisions. For U.S. federal awards, see the official <a class="inline-link" href="https://www.govinfo.gov/content/pkg/CFR-2026-title2-vol01/xhtml/CFR-2026-title2-vol01-part200-subpartE.html" target="_blank" rel="noopener noreferrer">cost principles in 2 CFR Part 200, Subpart E</a>. Other funders and jurisdictions may use different rules.</p></div>
       </section>
+    '''
+    return content
+
+
+def render_contract_page():
+    content = '''<section class="page-intro wrap"><p class="eyebrow">BIOracle / Contract</p>
+      <h1>Construct a<br><em>contract.</em></h1>
+      <div class="intro-bottom"><p class="lead">Create an unsigned draft using your own details, supporting documents, or an institutional PDF form.</p></div></section>
       <section class="wrap section" id="contract-builder" aria-labelledby="contract-builder-title">
         <p class="eyebrow">Agreement builder</p><h2 id="contract-builder-title">Put the terms in writing.</h2>
-        <p class="body-copy">Complete the fields below to download a formal, unsigned contract draft with the scope, funding allocations, student-support commitments, legal provisions, and signature blocks. Choose PDF, DOCX, Markdown, or RTF. This template needs legal review for the parties, jurisdiction, and any sponsor requirements; generating it does not execute an agreement.</p>
+        <p class="body-copy">Upload a prior contract and supporting documents to suggest values for this form, or enter them yourself. Review the entries, then generate an unsigned draft in PDF, DOCX, Markdown, or RTF, or use a PDF form supplied by your institution. All drafts need legal review; generating one does not execute an agreement.</p>
         <p class="form-note">Only the five fields marked <span class="required-mark" aria-hidden="true">*</span> are required. Unanswered optional fields receive standard “to be agreed” text in the PDF. Log in to save your responses automatically to your account and continue on your next visit.</p>
         <div class="contract-account-bar"><button type="button" class="button button-quiet" data-account-button>Log in</button><p id="draft-save-status" role="status" aria-live="polite">Log in to save your progress.</p><button id="draft-save-retry" class="text-button" type="button" hidden>Retry saving</button></div>
         <div id="draft-conflict" class="draft-conflict" hidden><p>A saved draft differs from the entries here. Choose which version to keep before saving continues.</p><div class="form-actions"><button id="draft-use-saved" class="button button-quiet" type="button">Use saved draft</button><button id="draft-use-local" class="text-button" type="button">Keep these entries</button></div></div>
+        <section class="contract-import-panel" aria-labelledby="contract-import-title">
+          <p class="eyebrow">Start from your documents</p><h3 id="contract-import-title">Suggest values for this form</h3>
+          <p class="body-copy">Add a previous contract and any supporting documents. AI will look for information relevant to the fields below. Review and edit each suggestion before applying it. Existing form entries are never selected for replacement automatically.</p>
+          <div class="form-field"><label for="contract-source-files">Add previous contracts and supporting documents (PDF, DOC, DOCX, RTF, TXT, CSV, XLSX)</label><input id="contract-source-files" type="file" accept=".pdf,.doc,.docx,.rtf,.txt,.csv,.xlsx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/rtf,text/rtf,text/plain,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" multiple><small id="contract-source-file-summary" aria-live="polite">Choose up to 5 files, in one or more selections. Combined limit: 5 MB.</small><ul id="contract-source-file-list" class="contract-source-file-list" aria-label="Selected source documents"></ul></div>
+          <label class="template-consent"><input id="contract-source-consent" type="checkbox"><span>I agree to send these files to BIOracle’s processing function and OpenAI for extraction. The function requests deletion of the temporary OpenAI files after analysis. Do not continue with confidential material unless you are authorized to share it.</span></label>
+          <div class="form-actions"><button id="contract-source-analyze" class="button button-quiet" type="button" disabled>Analyze documents with AI</button><button id="contract-source-apply" class="button" type="button" disabled>Apply selected suggestions</button></div>
+          <div id="contract-source-suggestions" class="template-mappings" hidden></div>
+          <p id="contract-source-status" class="form-status" role="status" aria-live="polite">Log in to use document extraction.</p>
+        </section>
         <noscript><p>Enable JavaScript to use the contract generator.</p></noscript>
         <form id="contract-form" class="contract-form">
     '''
@@ -39,6 +56,9 @@ def render_business_model():
             label = escape(field['label']) + ('' if optional else ' <span class="required-mark" aria-hidden="true">*</span><span class="sr-only"> (required)</span>')
             extra_class = ' contract-wide' if field['type'] == 'textarea' else ''
             attrs = f'id="contract-{key}" name="{key}"'
+            default_value = field.get('default', '')
+            if default_value and field['type'] != 'textarea':
+                attrs += f' value="{escape(default_value)}"'
             if not optional and not field.get('grantOnly'):
                 attrs += ' required'
             if hint:
@@ -49,7 +69,7 @@ def render_business_model():
                 content += f'<select {attrs}><option value="">Choose…</option>'
                 content += ''.join(f'<option value="{escape(value)}">{escape(text)}</option>' for value, text in field['options']) + '</select>'
             elif field['type'] == 'textarea':
-                content += f'<textarea {attrs} rows="4" maxlength="{field.get("maxLength", 4000)}"></textarea>'
+                content += f'<textarea {attrs} rows="4" maxlength="{field.get("maxLength", 4000)}">{escape(default_value)}</textarea>'
             else:
                 field_type = field['type']
                 if field_type == 'money':

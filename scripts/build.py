@@ -8,7 +8,7 @@ import re
 import shutil
 from urllib.parse import urlsplit
 from archive_protection import ArchiveProtection
-from business_model import render_business_model
+from business_model import render_business_model, render_contract_page
 from accounts import account_dialog, write_account_config
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,7 +40,7 @@ def text_link(label, href):
 
 
 def header(active):
-    items = [('About', '/about/'), ('Research', '/research/'), ('Approach', '/approach/'), ('Consortium', '/consortium/'), ('Publications', '/publications/')]
+    items = [('About', '/about/'), ('Contract', '/contract/'), ('Research', '/research/'), ('Approach', '/approach/'), ('Consortium', '/consortium/'), ('Publications', '/publications/')]
     nav_items = []
     for name, href in items:
         current = 'aria-current="page"' if active == name.lower() else ''
@@ -132,7 +132,7 @@ def home():
         ('04', 'Evolutionary forecasting', 'Mathematical theory that turns observations into possible futures.', '/research/forecasting/'),
     ]
     rows = ''.join(f'<a class="domain-row" href="{href}"><span class="index">{n}</span><div><h3>{title}</h3><p>{desc}</p></div>{ARROW}</a>' for n, title, desc, href in domains)
-    content = f'''<section class="hero"><div class="hero-content wrap"><p class="eyebrow">BIOracle · Company & research consortium</p><h1><span class="hero-headline">Evolution is the hammer.</span><em>Everything is a nail.</em></h1><p class="hero-tagline">taming risk the way nature does</p><p class="hero-description">Evolutionary intelligence for a changing world.<br>Across biology, markets, and artificial intelligence.</p><div class="hero-actions">{button('Explore our work', '/research/')}{text_link('Meet the consortium', '/consortium/')}</div></div><div class="hero-caption wrap"><span>One theory. A world of applications.</span><span>Biology · Markets · Intelligence</span></div></section>
+    content = f'''<section class="hero"><div class="hero-content wrap"><p class="eyebrow">BIOracle · Company & research consortium</p><h1><span class="hero-headline">Hacking nature's creativity</span><em>and speeding it up.</em></h1><p class="hero-tagline">Taming risk the way evolution does</p><p class="hero-description">Evolutionary intelligence for a changing world.<br>Across biology, markets, and artificial intelligence.</p><div class="hero-actions">{button('Explore our work', '/research/')}{text_link('Meet the consortium', '/consortium/')}</div></div><div class="hero-caption wrap"><span>One theory. A world of applications.</span><span>Biology · Markets · Intelligence</span></div></section>
     <section class="section wrap" id="our-work"><div class="section-heading"><div><p class="eyebrow">01 / Our field of view</p><h2>A common theory.<br>Many possible futures.</h2></div><p>Evolution reaches beyond the living world. We study the principles that shape change—and use them to ask what comes next.</p></div><div class="domain-list">{rows}</div></section>
     <section class="section approach-section"><div class="wrap approach-grid"><div><p class="eyebrow">02 / Our approach</p><h2>Understand change.<br><em>Anticipate consequence.</em></h2><p class="body-copy">We bring mathematics, computer science, and evolutionary biology to systems that adapt. Our work connects mechanisms with evidence, and forecasts with the decisions they inform.</p><div class="method-steps"><div><span>01</span><p><strong>Frame the question.</strong> Define the system, the decision, and the timescale.</p></div><div><span>02</span><p><strong>Model the mechanisms.</strong> Connect variation, selection, and chance.</p></div><div><span>03</span><p><strong>Learn and reassess.</strong> Compare possible futures with new observations.</p></div></div>{text_link('Discover our approach', '/approach/')}</div>{forecast()}</div></section>
     <section class="section wrap"><div class="section-heading"><div><p class="eyebrow">03 / The way we work</p><h2>Independent thinking.<br>Collective discovery.</h2></div><p>A company and a research consortium, connecting fundamental questions with practical decisions.</p></div><div class="two-paths"><article class="path-panel glass"><span class="index">The company / 01</span><h3>Applied foresight.</h3><p>Focused research, custom models, and evolutionary risk assessment for organizations facing a changing landscape.</p>{text_link('Work with BIOracle', '/consulting/')}</article><article class="path-panel path-panel-green"><span class="index">The consortium / 02</span><h3>Shared questions.</h3><p>An international community of researchers connecting disciplines, developing theory, and training the next generation.</p>{text_link('Explore the consortium', '/consortium/')}</article></div></section>{contact_band()}'''
@@ -213,7 +213,7 @@ def about():
         'new knowledge, and opportunities to learn. We bring entrepreneurship, academic '
         'research, and teaching into one working community: a new organizational response '
         'to a world being reshaped by artificial intelligence.',
-        f'<div class="about-intro-links"><a class="text-link" href="/mission/" target="_blank" rel="noopener noreferrer">Full mission statement<span class="sr-only"> (opens in a new tab or window)</span>{ARROW}</a><a class="text-link" href="/business-model/" target="_blank" rel="noopener noreferrer">Our business model<span class="sr-only"> (opens in a new tab or window)</span>{ARROW}</a></div>',
+        f'<div class="about-intro-links"><a class="text-link" href="/mission/" target="_blank" rel="noopener noreferrer">Full mission statement<span class="sr-only"> (opens in a new tab or window)</span>{ARROW}</a><a class="text-link" href="/business-model/" target="_blank" rel="noopener noreferrer">Our business model<span class="sr-only"> (opens in a new tab or window)</span>{ARROW}</a><a class="text-link" href="/contract/">Contract <span aria-hidden="true">↓</span></a></div>',
     )
     model = [
         ('01', 'Entrepreneurship',
@@ -414,8 +414,11 @@ home()
 about()
 mission()
 write_page('business-model', 'Our business model',
-           'A proposed funding model for prompt research delivery and graduate-student support, with a configurable contract PDF generator.',
-           render_business_model(), 'about', scripts=('/vendor/pdf-lib-1.17.1.min.js', '/contract-core.js', '/contract-form.js', '/contract-template.js', '/draft-sync.js', '/contract-autosave.js'))
+           'A proposed funding model for prompt research delivery and graduate-student support.',
+           render_business_model(), 'about')
+write_page('contract', 'Contract',
+           'Create an unsigned BIOracle contract draft, start from source documents, or fill your institution’s PDF form.',
+           render_contract_page(), 'contract', scripts=('/vendor/pdf-lib-1.17.1.min.js', '/contract-core.js', '/contract-form.js', '/contract-import.js', '/contract-template.js', '/draft-sync.js', '/contract-autosave.js'))
 research()
 for item in DATA['research']:
     research_detail(item)
