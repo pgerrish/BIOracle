@@ -55,7 +55,7 @@
   function renderPlacements() {
     mappingsBox.replaceChildren();
     const heading = document.createElement('h4'); heading.textContent = 'Review suggested placements'; mappingsBox.append(heading);
-    const note = document.createElement('p'); note.textContent = 'Nothing is selected automatically. Check each placement you want to use, choose the matching answer, then preview the result. Signature lines are not filled.'; mappingsBox.append(note);
+    const note = document.createElement('p'); note.textContent = 'Direct matches to named PDF fields start selected. Layout guesses remain unchecked. Check each placement and choose the matching answer, then preview the result. Signature lines are not filled.'; mappingsBox.append(note);
     const list = document.createElement('div'); list.className = 'template-mapping-list';
     for (const [index, item] of placements.entries()) {
       const row = document.createElement('div'); row.className = 'template-mapping-row';
@@ -158,6 +158,14 @@
       if (!page) continue;
       const text = String(contractValues()[source] || '').trim();
       if (!text) continue;
+      if(item.fieldName){
+        try{
+          const target=doc.getForm().getTextField(item.fieldName);
+          target.setText(text);
+          target.updateAppearances(font);
+          continue;
+        }catch{}
+      }
       const box = nativeBox(page,item);
       let chosen = null, lines = null;
       for (let size = Math.min(11, box.fitHeight * 0.7); size >= 4.5; size -= 0.5) {

@@ -2,31 +2,58 @@
 
 (() => {
   const aliases = {
-    reference:['agreement number','contract number','reference number','contract id'],
-    projectTitle:['project name','title of project'],
-    effectiveDate:['agreement date','date of agreement'], startDate:['project commencement','commencement date'],
-    endDate:['project end','completion date'], awardId:['grant number','award number','award id'],
-    awardTerms:['award conditions','grant conditions'], providerName:['provider legal name','university legal name','contractor legal name'],
-    sponsorName:['sponsor legal name','client legal name','customer legal name','funding organization'],
-    providerAddress:['provider address','contractor address','university address'], sponsorAddress:['sponsor address','client address'],
-    providerSigner:['provider signatory','contractor signatory'], sponsorSigner:['sponsor signatory','client signatory'],
-    providerTitle:['provider title','contractor title'], sponsorTitle:['sponsor title','client title'],
-    providerEmail:['provider email','contractor email'], sponsorEmail:['sponsor email','client email'],
-    scope:['scope of work','statement of work','services to be performed','project description'],
-    deliverables:['project deliverables','deliverable'], milestones:['project milestones','milestone'],
-    acceptance:['acceptance criteria','review and acceptance'], clientInputs:['client responsibilities','sponsor responsibilities'],
-    currency:['project currency'], totalBudget:['total amount','total award','total funding','contract amount','total cost'],
-    studentBudget:['student support','graduate student support'], researchBudget:['research team allocation','personnel allocation'],
-    directBudget:['direct costs','other direct costs'], adminBudget:['indirect costs','overhead','administrative costs'],
-    paymentSchedule:['payment terms','payment schedule','disbursement schedule'], invoiceDays:['payment due','net days'],
-    academicSupervisor:['principal investigator','faculty supervisor'], studentPlan:['student support plan','graduate student plan'],
-    governingLaw:['governing law','applicable law'], disputeForum:['venue','jurisdiction'], ipDetails:['intellectual property','ownership of intellectual property'],
-    publicationTerms:['publication rights','publication and thesis rights'], dataTerms:['data protection','data handling','privacy and security'],
-    terminationDays:['termination notice'], cureDays:['cure period'], liabilityCap:['limitation of liability','liability limit'], specialTerms:['additional terms','special provisions']
+    reference:['agreement number','contract number','contract no','reference number','contract id','solicitation number','document number'],
+    projectTitle:['project name','title of project','study title','research title','project description title'],
+    effectiveDate:['agreement date','date of agreement','execution date','date signed'],
+    startDate:['project commencement','commencement date','period of performance start','performance start date'],
+    endDate:['project end','completion date','period of performance end','performance end date'],
+    awardId:['grant number','award number','award id','funding opportunity number','sponsor award number'],
+    awardTerms:['award conditions','grant conditions','terms and conditions of award'],
+    providerName:['provider legal name','university legal name','contractor legal name','performer legal entity','subrecipient legal name','service provider name'],
+    sponsorName:['sponsor legal name','client legal name','customer legal name','funding organization','funding agency','recipient organization','recipient legal name','lead organization','performing organization','institution name'],
+    providerAddress:['provider address','contractor address','university address','performer address','subrecipient address'],
+    sponsorAddress:['sponsor address','client address','recipient address','institution address'],
+    providerSigner:['provider signatory','contractor signatory','authorized representative provider'],
+    sponsorSigner:['sponsor signatory','client signatory','authorized representative sponsor'],
+    providerTitle:['provider title','contractor title','provider representative title'], sponsorTitle:['sponsor title','client title','sponsor representative title'],
+    providerEmail:['provider email','contractor email','provider contact email'], sponsorEmail:['sponsor email','client email','recipient contact email'],
+    scope:['scope of work','statement of work','services to be performed','project description','research plan','technical approach','work to be performed'],
+    deliverables:['project deliverables','required deliverables','products and deliverables'], milestones:['project milestones','milestone schedule','deliverable schedule'],
+    acceptance:['acceptance criteria','review and acceptance','deliverable acceptance'], clientInputs:['client responsibilities','sponsor responsibilities','sponsor furnished resources','customer dependencies'],
+    currency:['project currency','currency code'], totalBudget:['total amount','total award','total funding','contract amount','total cost','estimated total costs','total project costs'],
+    studentBudget:['student support','graduate student support','student stipend allocation'], researchBudget:['research team allocation','personnel allocation','investigator compensation'],
+    directBudget:['direct costs','other direct costs','project expenses'], adminBudget:['indirect costs','overhead','administrative costs','facilities and administration'],
+    paymentSchedule:['payment terms','payment schedule','disbursement schedule','invoicing schedule'], invoiceDays:['payment due','net days','payment deadline'],
+    academicSupervisor:['principal investigator','faculty supervisor','scientific lead'], studentPlan:['student support plan','graduate student plan','student appointments'],
+    governingLaw:['governing law','applicable law','choice of law'], disputeForum:['venue','jurisdiction','dispute resolution forum'], ipDetails:['intellectual property','ownership of intellectual property','inventions and patents'],
+    publicationTerms:['publication rights','publication and thesis rights','publications and publicity'], dataTerms:['data protection','data handling','privacy and security','information security'],
+    terminationDays:['termination notice','notice of termination'], cureDays:['cure period','cure notice period'], liabilityCap:['limitation of liability','liability limit','maximum liability'], specialTerms:['additional terms','special provisions','other conditions']
   };
-  const normalize = value => String(value || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+  const normalize = value => String(value || '').replace(/([a-z0-9])([A-Z])/g,'$1 $2').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
   const esc = value => String(value).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  const fieldTerms = field => [...new Set([field.label, ...(aliases[field.name] || [])])].sort((a,b)=>b.length-a.length);
+  const fieldTerms = field => [...new Set([field.label, field.name, ...(aliases[field.name] || [])])].sort((a,b)=>b.length-a.length);
+  function termSpan(text,term){
+    const words=normalize(term).split(' ').filter(Boolean);
+    if(!words.length)return null;
+    const pattern=words.map(esc).join('[^a-z0-9]+');
+    return String(text).match(new RegExp(`(?:^|[^a-z0-9])(${pattern})(?=$|[^a-z0-9])`,'i'));
+  }
+  function termScore(text,term){
+    if(termSpan(text,term))return 100+normalize(term).length;
+    const wanted=normalize(term).split(' ').filter(word=>word.length>2);
+    if(wanted.length<2)return 0;
+    const actual=new Set(normalize(text).split(' '));
+    const overlap=wanted.filter(word=>actual.has(word)).length/wanted.length;
+    return overlap>=.8?60+overlap*10+Math.min(wanted.length,6):0;
+  }
+  function bestTerm(text,field){
+    let best=null;
+    for(const term of fieldTerms(field)){
+      const score=termScore(text,term);
+      if(score&&(!best||score>best.score))best={term,score,match:termSpan(text,term)};
+    }
+    return best;
+  }
 
   let tesseractPromise;
   const loadedScripts = new Map();
@@ -100,6 +127,13 @@
       const page=await pdf.getPage(n), viewport=page.getViewport({scale:1});
       const content=await page.getTextContent();
       let blocks=textBlocks(content.items,viewport);
+      const annotations=await page.getAnnotations({intent:'display'});
+      const formFields=annotations.filter(item=>item.fieldName&&item.rect&&item.fieldType==='Tx'&&!String(item.fieldValue||'').trim()).map(item=>{
+        const rect=viewport.convertToViewportRectangle(item.rect);
+        const x=Math.min(rect[0],rect[2]),y=Math.min(rect[1],rect[3]);
+        const width=Math.abs(rect[2]-rect[0]),height=Math.abs(rect[3]-rect[1]);
+        return {name:item.fieldName,x:Math.round(x/viewport.width*10000),y:Math.round(y/viewport.height*10000),width:Math.round(width/viewport.width*10000),height:Math.round(height/viewport.height*10000)};
+      });
       const textLength=blocks.map(b=>b.text).join(' ').replace(/\s/g,'').length;
       if(textLength<18){
         const worker=await getOcrWorker(onProgress);
@@ -115,7 +149,7 @@
         })).filter(line=>line.text);
         canvas.width=canvas.height=0;
       }
-      pages.push({width:viewport.width,height:viewport.height,blocks});
+      pages.push({width:viewport.width,height:viewport.height,blocks,formFields});
     }
     return {pages,text:pages.map(page=>page.blocks.map(block=>block.text).join('\n')).join('\n')};
   }
@@ -145,25 +179,25 @@
 
   function candidateValue(blocks,index,field){
     const line=blocks[index].text;
-    const term=fieldTerms(field).find(value=>normalize(line).includes(normalize(value)));
-    if(!term) return null;
-    const re=new RegExp(esc(term),'i');
-    const found=line.match(re);
-    let value=found?line.slice(found.index+found[0].length).replace(/^\s*(?:[:#=–—-]\s*)?/,'').trim():'';
+    const match=bestTerm(line,field);
+    if(!match) return null;
+    const found=match.match;
+    const end=found?found.index+found[0].length:line.length;
+    let value=found?line.slice(end).replace(/^\s*(?:[:#=–—-]\s*)?/,'').trim():'';
     value=value.replace(/\s+(?:page|section)\s+\d+\s*$/i,'').replace(/[|•]+$/,'').trim();
     if(!value){
       const next=blocks[index+1];
-      if(next && next.y-blocks[index].y < Math.max(45,blocks[index].height*3) && !fieldsAnyMatch(next.text)) value=next.text.trim();
+      if(next && next.y-blocks[index].y < Math.max(55,blocks[index].height*4) && !fieldsAnyMatch(next.text)) value=next.text.trim();
     }
     if(field.type==='select'&&value){
       const option=(field.options||[]).find(([key,label])=>normalize(value).includes(normalize(label))||normalize(value)===normalize(key));
       if(option)value=option[0];
     }
-    if(!value||normalize(value)===normalize(term)||value.length> (field.maxLength||1000))return null;
-    return {value,term};
+    if(!value||normalize(value)===normalize(match.term)||value.length> (field.maxLength||1000))return null;
+    return {value,term:match.term};
   }
   let knownFields=[];
-  function fieldsAnyMatch(line){return knownFields.some(field=>fieldTerms(field).some(term=>normalize(line).includes(normalize(term))));}
+  function fieldsAnyMatch(line){return knownFields.some(field=>bestTerm(line,field));}
   function extractSuggestions(documents,fields){
     knownFields=fields;
     const found=[];
@@ -190,17 +224,27 @@
   function mapAnswersToPdf(pages,answers,fields){
     const known=new Map(fields.map(field=>[field.name,field]));
     const placements=[];
+    for(const [pageIndex,page] of pages.entries()){
+      for(const widget of page.formFields||[]){
+        const ranked=answers.map(answer=>({answer,field:known.get(answer.name)})).filter(item=>item.field).map(item=>({...item,match:bestTerm(widget.name,item.field)})).filter(item=>item.match&&item.match.score>=60).sort((a,b)=>b.match.score-a.match.score);
+        if(!ranked.length||(ranked[1]&&ranked[1].match.score===ranked[0].match.score))continue;
+        const {answer,field}=ranked[0];
+        placements.push({page:pageIndex,source:answer.name,fieldLabel:field.label,fieldName:widget.name,confidence:ranked[0].match.score>=100?'high':'medium',x:widget.x,y:widget.y,width:widget.width,height:widget.height});
+      }
+    }
     for(const answer of answers){
+      if(placements.some(item=>item.source===answer.name))continue;
       const field=known.get(answer.name); if(!field)continue;
       const terms=fieldTerms(field);
       for(const [pageIndex,page] of pages.entries()){
         for(let i=0;i<page.blocks.length;i++){
           const block=page.blocks[i];
-          const term=terms.find(value=>normalize(block.text).includes(normalize(value)));
-          if(!term)continue;
-          const match=block.text.match(new RegExp(esc(term),'i')); if(!match)continue;
-          const run=block.runs?.find(item=>normalize(item.text).includes(normalize(term)));
-          const runMatch=run?.text.match(new RegExp(esc(term),'i'));
+          const matched=bestTerm(block.text,field);
+          if(!matched)continue;
+          const match=matched.match; if(!match)continue;
+          const term=matched.term;
+          const run=block.runs?.find(item=>termSpan(item.text,term));
+          const runMatch=run&&termSpan(run.text,term);
           const labelRight=run&&runMatch
             ? run.x+run.width*Math.min(1,(runMatch.index+runMatch[0].length)/Math.max(1,run.text.length))
             : block.x+block.width*Math.min(1,(match.index+match[0].length)/Math.max(1,block.text.length));
