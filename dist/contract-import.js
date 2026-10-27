@@ -4,12 +4,14 @@
   const form = document.getElementById('contract-form');
   const schema = JSON.parse(document.getElementById('contract-schema')?.textContent || '[]');
   const fileInput = document.getElementById('contract-source-files');
+  const cloneButton = document.getElementById('contract-source-clone');
   const analyzeButton = document.getElementById('contract-source-analyze');
   const applyButton = document.getElementById('contract-source-apply');
   const suggestionsBox = document.getElementById('contract-source-suggestions');
   const status = document.getElementById('contract-source-status');
   const fileSummary = document.getElementById('contract-source-file-summary');
   const fileList = document.getElementById('contract-source-file-list');
+  const cloneList = document.getElementById('contract-source-clones');
   if (!form || !fileInput || !window.BIOraclePDFReader) return;
 
   const MB = 1024 * 1024;
@@ -17,6 +19,7 @@
   const fieldMap = new Map(fields.map(field => [field.name, field]));
   let suggestions = [];
   let selectedFiles = [];
+  let clones = [];
 
   function clearSuggestions() {
     suggestions = [];
@@ -25,7 +28,15 @@
     applyButton.disabled = true;
   }
   function refresh() {
-    analyzeButton.disabled = !selectedFiles.length;
+    const pdfCount=selectedFiles.filter(file=>/\.pdf$/i.test(file.name)).length;
+    cloneButton.hidden=!pdfCount;
+    cloneButton.disabled=!pdfCount;
+    analyzeButton.disabled=!selectedFiles.length||(pdfCount>0&&clones.length!==pdfCount);
+    analyzeButton.textContent=pdfCount?'Extract information from RTF copies':'Extract information from documents';
+  }
+  function clearClones(){
+    clones.forEach(item=>URL.revokeObjectURL(item.url));
+    clones=[];cloneList.replaceChildren();cloneList.hidden=true;
   }
   function acceptedFiles(files) {
     const allowed = /\.(pdf|docx|rtf|txt|csv|xlsx)$/i;
@@ -41,7 +52,7 @@
       const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'text-button';
       remove.textContent = 'Remove'; remove.setAttribute('aria-label', `Remove ${file.name}`);
       remove.addEventListener('click', () => {
-        selectedFiles.splice(index,1); clearSuggestions(); renderFiles();
+        selectedFiles.splice(index,1); clearSuggestions(); clearClones(); renderFiles();
         status.textContent = selectedFiles.length ? 'File removed. The remaining documents are ready for analysis.' : 'Choose a previous contract or supporting documents.';
         refresh();
       });
@@ -64,11 +75,38 @@
     } else if (total > 5 * MB) {
       status.textContent = 'The combined size must be 5 MB or less. The new selection was not added.';
     } else {
+      clearClones();
       selectedFiles = combined;
       status.textContent = `${selectedFiles.length} document${selectedFiles.length === 1 ? '' : 's'} ready. Add more files or analyze them together.`;
     }
     renderFiles();
     refresh();
+  });
+
+  cloneButton.addEventListener('click',async()=>{
+    const pdfs=selectedFiles.filter(file=>/\.pdf$/i.test(file.name));
+    if(!pdfs.length)return;
+    cloneButton.disabled=true;analyzeButton.disabled=true;clearClones();clearSuggestions();
+    try{
+      for(const [index,file] of pdfs.entries()){
+        status.textContent=`Creating text RTF copy from ${file.name} (${index+1} of ${pdfs.length})…`;
+        const parsed=await window.BIOraclePDFReader.readPdf(new Uint8Array(await file.arrayBuffer()),progress=>{status.textContent=`${file.name}: ${progress}`;});
+        const rtf=window.BIOraclePDFReader.createRtfCopy(parsed.pages);
+        const name=file.name.replace(/\.pdf$/i,'')+'.rtf';
+        const url=URL.createObjectURL(new Blob([rtf],{type:'application/rtf;charset=utf-8'}));
+        clones.push({sourceFile:file,name,rtf,url});
+      }
+      cloneList.replaceChildren();
+      for(const clone of clones){
+        const li=document.createElement('li');
+        const link=document.createElement('a');link.href=clone.url;link.download=clone.name;link.textContent=`Download ${clone.name}`;
+        li.append(link);cloneList.append(li);
+      }
+      cloneList.hidden=false;
+      status.textContent='RTF text copies are ready. Review or download them above, then extract suggestions from the copies.';
+    }catch(error){
+      clearClones();status.textContent=error.message||'Could not create an RTF copy of one of the PDFs.';
+    }finally{refresh();}
   });
 
   function currentValue(name) {
@@ -122,10 +160,18 @@
     if (!acceptedFiles(files) || files.reduce((sum, file) => sum + file.size, 0) > 5 * MB) {
       status.textContent = 'Choose up to five supported files with a combined size of 5 MB or less.'; return;
     }
+    const pdfs=files.filter(file=>/\.pdf$/i.test(file.name));
+    if(pdfs.length&&clones.length!==pdfs.length){status.textContent='Create the RTF copies first. Information is extracted from those copies.';return;}
     analyzeButton.disabled = true; clearSuggestions(); status.textContent = 'Preparing documents for analysis…';
     try {
       const documents=[];
       for(const [index,file] of files.entries()) {
+        const clone=clones.find(item=>item.sourceFile===file);
+        if(clone){
+          status.textContent=`Extracting text from ${clone.name} (${index+1} of ${files.length})…`;
+          documents.push({...window.BIOraclePDFReader.readRtf(clone.rtf),name:clone.name});
+          continue;
+        }
         status.textContent = `Reading ${file.name} (${index+1} of ${files.length}) in this browser…`;
         const result=await window.BIOraclePDFReader.readFile(file,progress=>{status.textContent=`${file.name}: ${progress}`;});
         documents.push({...result,name:file.name});

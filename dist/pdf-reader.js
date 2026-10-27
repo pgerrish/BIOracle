@@ -154,11 +154,47 @@
     return {pages,text:pages.map(page=>page.blocks.map(block=>block.text).join('\n')).join('\n')};
   }
 
+  function rtfEscape(value){
+    let out='';
+    for(const char of String(value)){
+      const code=char.codePointAt(0);
+      if(char==='\\'||char==='{'||char==='}')out+='\\'+char;
+      else if(char==='\n')out+='\\line ';
+      else if(char==='\r')continue;
+      else if(code>=32&&code<=126)out+=char;
+      else{
+        const units=code>0xffff?[0xd800+((code-0x10000)>>10),0xdc00+((code-0x10000)&0x3ff)]:[code];
+        out+=units.map(unit=>`\\u${unit>32767?unit-65536:unit}?`).join('');
+      }
+    }
+    return out;
+  }
+  function createRtfCopy(pages){
+    const body=pages.flatMap((page,index)=>[
+      `PDF text copy · Page ${index+1}`,
+      ...page.blocks.map(block=>block.text).filter(Boolean)
+    ]).map(rtfEscape).join('\\par\n');
+    return `{\\rtf1\\ansi\\deff0\\uc1{\\fonttbl{\\f0 Arial;}}\\viewkind4\\f0\\fs20 ${body}}`;
+  }
+  function readRtf(rtf){
+    const text=String(rtf)
+      .replace(/\\u(-?\d+)\??/g,(_,value)=>String.fromCharCode((Number(value)+65536)%65536))
+      .replace(/\\'([0-9a-f]{2})/gi,(_,value)=>String.fromCharCode(parseInt(value,16)))
+      .replace(/\\(?:par|line|page)\b ?/gi,'\n')
+      .replace(/\\tab\b ?/gi,'\t')
+      .replace(/\\([{}\\])/g,'$1')
+      .replace(/\\[a-z]+-?\d* ?/gi,'')
+      .replace(/[{}]/g,'')
+      .replace(/\r/g,'');
+    const lines=text.split('\n').map((value,index)=>({text:value.trim(),x:0,y:index*14,width:1000,height:12})).filter(line=>line.text);
+    return {text:lines.map(line=>line.text).join('\n'),pages:[{width:1000,height:Math.max(800,lines.length*14),blocks:lines}]};
+  }
+
   async function readFile(file,onProgress){
     if(/\.pdf$/i.test(file.name)||file.type==='application/pdf') return readPdf(new Uint8Array(await file.arrayBuffer()),onProgress);
-    if(/\.(txt|csv|rtf)$/i.test(file.name)){
+    if(/\.rtf$/i.test(file.name))return readRtf(await file.text());
+    if(/\.(txt|csv)$/i.test(file.name)){
       let text=await file.text();
-      if(/\.rtf$/i.test(file.name)) text=text.replace(/\\'[0-9a-f]{2}/gi,' ').replace(/\\[a-z]+-?\d* ?/gi,' ').replace(/[{}]/g,' ');
       const lines=text.split(/\r?\n/).map((value,index)=>({text:value.trim(),x:0,y:index*14,width:1000,height:12})).filter(line=>line.text);
       return {text:lines.map(line=>line.text).join('\n'),pages:[{width:1000,height:Math.max(800,lines.length*14),blocks:lines}]};
     }
@@ -270,5 +306,5 @@
     return placements;
   }
 
-  window.BIOraclePDFReader={readFile,readPdf,extractSuggestions,mapAnswersToPdf};
+  window.BIOraclePDFReader={readFile,readPdf,createRtfCopy,readRtf,extractSuggestions,mapAnswersToPdf};
 })();
