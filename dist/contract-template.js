@@ -4,7 +4,6 @@
   const form = document.getElementById('contract-form');
   const schema = JSON.parse(document.getElementById('contract-schema').textContent);
   const fileInput = document.getElementById('contract-template-file');
-  const consent = document.getElementById('contract-template-consent');
   const mapButton = document.getElementById('contract-template-map');
   const previewButton = document.getElementById('contract-template-preview-button');
   const fillButton = document.getElementById('contract-template-fill');
@@ -12,19 +11,15 @@
   const status = document.getElementById('contract-template-status');
   const download = document.getElementById('contract-template-download');
   const preview = document.getElementById('contract-template-preview');
-  const account = window.BIOracleAccount;
-  const config = window.BIOracleAccountConfig || {};
-  if (!form || !window.PDFLib || !account) return;
+  if (!form || !window.PDFLib || !window.BIOraclePDFReader) return;
 
   const sourceFields = schema.flatMap(group => group.fields.map(field => ({name:field.name,label:field.label})));
   let pdfBytes = null, placements = [], formSnapshot = '', downloadUrl = null, previewUrl = null, previewStale = true, analysisStale = false;
   const contractValues = () => Object.fromEntries(sourceFields.map(({name}) => [name, form.elements[name]?.disabled ? '' : (form.elements[name]?.value || '')]));
-  const signedIn = () => !!account.state.user;
   function refresh() {
-    mapButton.disabled = !signedIn() || !fileInput.files?.length || !consent.checked;
-    previewButton.disabled = !signedIn() || !pdfBytes || !placements.length || analysisStale;
-    fillButton.disabled = !signedIn() || !downloadUrl || previewStale;
-    if (!signedIn()) status.textContent = 'Log in to use AI PDF filling.';
+    mapButton.disabled = !fileInput.files?.length;
+    previewButton.disabled = !pdfBytes || !placements.length || analysisStale;
+    fillButton.disabled = !downloadUrl || previewStale;
   }
   function clearBlob(url) { if (url) URL.revokeObjectURL(url); }
   function clearResult() {
@@ -41,10 +36,8 @@
     if (!file) { status.textContent = 'Choose a PDF contract to continue.'; refresh(); return; }
     if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) { fileInput.value = ''; status.textContent = 'Choose a PDF file.'; refresh(); return; }
     if (file.size > 5 * 1024 * 1024) { fileInput.value = ''; status.textContent = 'The PDF must be smaller than 5 MB.'; refresh(); return; }
-    status.textContent = 'PDF selected. It will be sent to OpenAI only after you consent and request analysis.'; refresh();
+    status.textContent = 'PDF selected. It will be read in this browser and will not be uploaded.'; refresh();
   });
-  consent.addEventListener('change', refresh);
-  account.subscribe(refresh);
   function invalidatePreview() {
     if (placements.length && JSON.stringify(contractValues()) !== formSnapshot) {
       analysisStale = true; previewStale = true; previewButton.disabled = true; fillButton.disabled = true;
@@ -62,7 +55,7 @@
   function renderPlacements() {
     mappingsBox.replaceChildren();
     const heading = document.createElement('h4'); heading.textContent = 'Review suggested placements'; mappingsBox.append(heading);
-    const note = document.createElement('p'); note.textContent = 'High-confidence suggestions start selected. Check or change each entry, then preview the result. Signature lines are always left blank.'; mappingsBox.append(note);
+    const note = document.createElement('p'); note.textContent = 'Nothing is selected automatically. Check each placement you want to use, choose the matching answer, then preview the result. Signature lines are not filled.'; mappingsBox.append(note);
     const list = document.createElement('div'); list.className = 'template-mapping-list';
     for (const [index, item] of placements.entries()) {
       const row = document.createElement('div'); row.className = 'template-mapping-row';
@@ -89,50 +82,36 @@
   }
 
   mapButton.addEventListener('click', async () => {
-    const file = fileInput.files?.[0], client = account.client;
-    if (!file || !client || !signedIn()) { account.open(); return; }
-    if (!consent.checked) { status.textContent = 'Agree to the AI data-sharing notice before requesting analysis.'; return; }
+    const file = fileInput.files?.[0];
+    if (!file) return;
     mapButton.disabled = true; clearResult(); status.textContent = 'Checking the PDF and preparing your answers…';
     try {
       const raw = new Uint8Array(await file.arrayBuffer());
       const pdf = await window.PDFLib.PDFDocument.load(raw, {updateMetadata:false});
       const pageCount = pdf.getPageCount();
-      if (pageCount > 20) throw new Error('For cost and processing limits, the PDF must have 20 pages or fewer.');
+      if (pageCount > 20) throw new Error('For browser performance, the PDF must have 20 pages or fewer.');
       const answers = sourceFields.map(field => ({name:field.name,label:field.label,value:String(contractValues()[field.name] || '').trim()})).filter(field => field.value);
       if (!answers.length) throw new Error('Enter some contract details in the webpage form first.');
-      if (new TextEncoder().encode(JSON.stringify(answers)).length > 44_000) throw new Error('There is too much text for one AI request. Shorten some entries and try again.');
       pdfBytes = raw; formSnapshot = JSON.stringify(contractValues());
-      const sessionResult = await client.auth.getSession();
-      const session = sessionResult.data?.session;
-      if (sessionResult.error || !session?.access_token) { account.open(); throw new Error('Please log in again before analyzing this PDF.'); }
-      const payload = new FormData(); payload.append('pdf', file, 'uploaded-contract.pdf'); payload.append('answers', JSON.stringify(answers));
-      status.textContent = 'AI is inspecting the PDF and locating places for your answers…';
-      const response = await fetch(`${config.supabaseUrl}/functions/v1/map-contract-fields`, {
-        method:'POST',
-        headers:{authorization:`Bearer ${session.access_token}`, apikey:config.publishableKey},
-        body:payload,
-        signal:AbortSignal.timeout(120_000)
-      });
-      let result = {};
-      try { result = await response.json(); } catch {}
-      if (!response.ok) throw new Error(result.error || `PDF analysis failed (${response.status}).`);
+      status.textContent = 'Reading labels and finding likely answer areas on this device…';
+      const readResult = await window.BIOraclePDFReader.readPdf(raw,progress=>{status.textContent=progress;});
       const pageInfo = pdf.getPages().map(page => {
         const size = page.getSize();
         return {width:size.width,height:size.height,rotation:((page.getRotation().angle % 360) + 360) % 360};
       });
-      placements = (Array.isArray(result.placements) ? result.placements : []).filter(item =>
+      placements = window.BIOraclePDFReader.mapAnswersToPdf(readResult.pages,answers,sourceFields).filter(item =>
         Number.isInteger(item.page) && item.page >= 0 && item.page < pageCount &&
         answers.some(answer => answer.name === item.source) &&
         [item.x,item.y,item.width,item.height].every(Number.isInteger) &&
         item.x >= 0 && item.y >= 0 && item.width > 0 && item.height > 0 && item.x + item.width <= 10000 && item.y + item.height <= 10000 &&
         ['high','medium','low'].includes(item.confidence)
       ).map(item => ({...item,include:item.confidence === 'high'}));
-      if (!placements.length) throw new Error('AI could not find clear matching places for these answers. Try a clearer PDF or add more details to the webpage form.');
+      if (!placements.length) throw new Error('No likely answer areas were found. Try a text-based PDF with clearly labeled fields, or enter answers manually in the form.');
       // Keep the uploaded page geometry so later placement cannot reference a non-existent page.
       placements = placements.filter(item => item.page < pageInfo.length);
       analysisStale = false;
       renderPlacements();
-      status.textContent = `AI found ${placements.length} possible placements. Review them, then preview the filled copy.`;
+      status.textContent = `Found ${placements.length} possible placements on this device. Review them, then preview the filled copy.`;
     } catch (error) {
       clearResult(); status.textContent = error.message || 'Unable to analyze this PDF. Please try another document.';
     } finally { refresh(); }
@@ -192,7 +171,7 @@
   }
 
   previewButton.addEventListener('click', async () => {
-    if (!pdfBytes || !signedIn()) { account.open(); return; }
+    if (!pdfBytes) return;
     previewButton.disabled = true; fillButton.disabled = true; status.textContent = 'Preparing the filled PDF preview…';
     try {
       if (![...mappingsBox.querySelectorAll('input[data-include]')].some(input => input.checked)) throw new Error('Select at least one placement to fill.');
@@ -211,7 +190,7 @@
     } finally { refresh(); }
   });
   fillButton.addEventListener('click', () => {
-    if (!downloadUrl || previewStale || !signedIn()) { account.open(); return; }
+    if (!downloadUrl || previewStale) return;
     download.click();
   });
   refresh();

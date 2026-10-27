@@ -4,16 +4,13 @@
   const form = document.getElementById('contract-form');
   const schema = JSON.parse(document.getElementById('contract-schema')?.textContent || '[]');
   const fileInput = document.getElementById('contract-source-files');
-  const consent = document.getElementById('contract-source-consent');
   const analyzeButton = document.getElementById('contract-source-analyze');
   const applyButton = document.getElementById('contract-source-apply');
   const suggestionsBox = document.getElementById('contract-source-suggestions');
   const status = document.getElementById('contract-source-status');
   const fileSummary = document.getElementById('contract-source-file-summary');
   const fileList = document.getElementById('contract-source-file-list');
-  const account = window.BIOracleAccount;
-  const config = window.BIOracleAccountConfig || {};
-  if (!form || !fileInput || !account) return;
+  if (!form || !fileInput || !window.BIOraclePDFReader) return;
 
   const MB = 1024 * 1024;
   const fields = schema.flatMap(group => group.fields);
@@ -21,7 +18,6 @@
   let suggestions = [];
   let selectedFiles = [];
 
-  function signedIn() { return !!account.state.user; }
   function clearSuggestions() {
     suggestions = [];
     suggestionsBox.replaceChildren();
@@ -29,11 +25,10 @@
     applyButton.disabled = true;
   }
   function refresh() {
-    analyzeButton.disabled = !signedIn() || !selectedFiles.length || !consent.checked;
-    if (!signedIn()) status.textContent = 'Log in to use AI document extraction.';
+    analyzeButton.disabled = !selectedFiles.length;
   }
   function acceptedFiles(files) {
-    const allowed = /\.(pdf|doc|docx|rtf|txt|csv|xlsx)$/i;
+    const allowed = /\.(pdf|docx|rtf|txt|csv|xlsx)$/i;
     return files.length > 0 && files.length <= 5 && files.every(file => allowed.test(file.name));
   }
 
@@ -65,7 +60,7 @@
     const combined = [...selectedFiles,...additions];
     const total = combined.reduce((sum,file)=>sum+file.size,0);
     if (!acceptedFiles(combined)) {
-      status.textContent = 'You can add up to 5 PDF, DOC, DOCX, RTF, TXT, CSV, or XLSX files.';
+      status.textContent = 'Choose up to 5 PDF, DOCX, RTF, TXT, CSV, or XLSX files.';
     } else if (total > 5 * MB) {
       status.textContent = 'The combined size must be 5 MB or less. The new selection was not added.';
     } else {
@@ -75,8 +70,6 @@
     renderFiles();
     refresh();
   });
-  consent.addEventListener('change', refresh);
-  account.subscribe(refresh);
 
   function currentValue(name) {
     const element = form.elements[name];
@@ -86,7 +79,7 @@
   function renderSuggestions(items) {
     clearSuggestions();
     const heading = document.createElement('h4'); heading.textContent = 'Review suggested form entries';
-    const note = document.createElement('p'); note.textContent = 'Check each value you want to use. Existing answers and conflicting source values start unchecked. You can edit suggestions before applying them.';
+    const note = document.createElement('p'); note.textContent = 'Nothing is selected automatically. Check each value you want to use, edit it if needed, and apply only after reviewing the source line.';
     const list = document.createElement('div'); list.className = 'template-mapping-list';
     for (const [index, item] of items.entries()) {
       const field = fieldMap.get(item.field);
@@ -126,28 +119,18 @@
 
   analyzeButton.addEventListener('click', async () => {
     const files = [...selectedFiles];
-    if (!signedIn()) { account.open(); return; }
-    if (!consent.checked) { status.textContent = 'Agree to the data-sharing notice before requesting analysis.'; return; }
     if (!acceptedFiles(files) || files.reduce((sum, file) => sum + file.size, 0) > 5 * MB) {
       status.textContent = 'Choose up to five supported files with a combined size of 5 MB or less.'; return;
     }
     analyzeButton.disabled = true; clearSuggestions(); status.textContent = 'Preparing documents for analysis…';
     try {
-      const sessionResult = await account.client.auth.getSession();
-      const session = sessionResult.data?.session;
-      if (sessionResult.error || !session?.access_token) { account.open(); throw new Error('Please log in again before analyzing these documents.'); }
-      const payload = new FormData();
-      files.forEach(file => payload.append('documents', file, file.name));
-      payload.append('fields', JSON.stringify(fields.map(({name,label,type,required,options,hint,maxLength,min,max,grantOnly}) => ({name,label,type,required:!!required,options,hint,maxLength,min,max,grantOnly:!!grantOnly}))));
-      status.textContent = 'AI is reading the documents and looking for information that matches the form…';
-      const response = await fetch(`${config.supabaseUrl}/functions/v1/extract-contract-answers`, {
-        method:'POST', headers:{authorization:`Bearer ${session.access_token}`, apikey:config.publishableKey},
-        body:payload, signal:AbortSignal.timeout(120_000)
-      });
-      let result = {};
-      try { result = await response.json(); } catch {}
-      if (!response.ok) throw new Error(result.error || `Document analysis failed (${response.status}).`);
-      suggestions = (Array.isArray(result.suggestions) ? result.suggestions : []).filter(item => {
+      const documents=[];
+      for(const [index,file] of files.entries()) {
+        status.textContent = `Reading ${file.name} (${index+1} of ${files.length}) in this browser…`;
+        const result=await window.BIOraclePDFReader.readFile(file,progress=>{status.textContent=`${file.name}: ${progress}`;});
+        documents.push({...result,name:file.name});
+      }
+      suggestions = window.BIOraclePDFReader.extractSuggestions(documents,fields).filter(item => {
         const field = fieldMap.get(item.field);
         return field && typeof item.value === 'string' && item.value.length <= (field.maxLength || 4000) &&
           ['high','medium','low'].includes(item.confidence) && typeof item.sourceDocument === 'string' &&
@@ -156,14 +139,13 @@
       });
       if (!suggestions.length) throw new Error('No clear field values were found. Try a different or more complete document.');
       renderSuggestions(suggestions);
-      status.textContent = `AI found ${suggestions.length} possible form entr${suggestions.length === 1 ? 'y' : 'ies'}. Review and select the values to apply.`;
+      status.textContent = `Found ${suggestions.length} possible form entr${suggestions.length === 1 ? 'y' : 'ies'} on this device. Review and select values to apply.`;
     } catch (error) {
       clearSuggestions(); status.textContent = error.message || 'Unable to analyze these documents. Please try again.';
     } finally { refresh(); }
   });
 
   applyButton.addEventListener('click', () => {
-    if (!signedIn()) { account.open(); return; }
     const rows = [...suggestionsBox.querySelectorAll('.contract-suggestion-row')];
     let applied = 0;
     for (const row of rows) {
@@ -177,7 +159,7 @@
       target.dispatchEvent(new Event('change', {bubbles:true}));
       applied++;
     }
-    status.textContent = applied ? `Applied ${applied} suggestion${applied === 1 ? '' : 's'}. Your account draft will save these form entries automatically.` : 'No suggestions were selected.';
+    status.textContent = applied ? `Applied ${applied} suggestion${applied === 1 ? '' : 's'}. Sign in to save the updated form to your account.` : 'No suggestions were selected.';
   });
   refresh();
 })();

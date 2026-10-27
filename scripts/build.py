@@ -418,7 +418,7 @@ write_page('business-model', 'Our business model',
            render_business_model(), 'about')
 write_page('contract', 'Contract',
            'Create an unsigned BIOracle contract draft, start from source documents, or fill your institution’s PDF form.',
-           render_contract_page(), 'contract', scripts=('/vendor/pdf-lib-1.17.1.min.js', '/contract-core.js', '/contract-form.js', '/contract-import.js', '/contract-template.js', '/draft-sync.js', '/contract-autosave.js'))
+           render_contract_page(), 'contract', scripts=('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js', '/vendor/pdf-lib-1.17.1.min.js', '/pdf-reader.js', '/contract-core.js', '/contract-form.js', '/contract-import.js', '/contract-template.js', '/draft-sync.js', '/contract-autosave.js'))
 research()
 for item in DATA['research']:
     research_detail(item)
