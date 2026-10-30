@@ -27,7 +27,7 @@ def render_business_model():
 
 def render_contract_page():
     content = '''<section class="page-intro wrap"><p class="eyebrow">BIOracle / Contract</p>
-      <h1>Construct a<br><em>contract.</em></h1>
+      <h1>Towards a<br><em>contract.</em></h1>
       <div class="intro-bottom"><p class="lead">Create an unsigned draft using your own details, supporting documents, or an institutional PDF form.</p></div></section>
       <section class="wrap section" id="contract-builder" aria-labelledby="contract-builder-title">
         <p class="eyebrow">Agreement builder</p><h2 id="contract-builder-title">Put the terms in writing.</h2>
