@@ -260,6 +260,14 @@ def about():
       <div class="section-heading"><div><p class="eyebrow">Our three-pronged approach</p><h2 id="foundations-title">Three foundations.<br><em>A connected perspective.</em></h2></div><p>Adaptation, collective instability, and driven dynamics offer complementary ways to understand changing systems.</p></div>
       <div class="three-columns about-pillars">{foundation_cards}</div>
       <div class="about-next"><p>We connect these perspectives through mathematics, computation, and observation, testing which mechanisms matter in each system.</p>{text_link('See how we work', '/approach/')}</div>
+    </section>
+    <section class="wrap section about-curators" aria-labelledby="curators-title">
+      <div class="section-heading"><div><p class="eyebrow">Coordination &amp; content</p><h2 id="curators-title">The people<br><em>keeping us connected.</em></h2></div><p>Eva Gerrish and Alex Gerrish serve as BIOracle’s curators and administrators for coordination and content, helping keep our community organized and our ideas clear and accessible.</p></div>
+      <div class="two-paths">
+        <article class="path-panel glass"><span class="index">01 / Curator &amp; administrator</span><h3>Eva Gerrish</h3><p>Eva studies economics and finance at the University of New Mexico (UNM).</p></article>
+        <article class="path-panel glass"><span class="index">02 / Curator &amp; administrator</span><h3>Alex Gerrish</h3><p>Alex studies mathematics and computer science at Pasadena City College in Pasadena, California.</p></article>
+      </div>
+      <p class="about-note">Their participation puts our academy’s philosophy into practice: students help shape the community as they learn within it.</p>
     </section>{contact_band()}'''
     write_page('about', 'About',
                'BIOracle connects entrepreneurship, academic research, and teaching through Darwinian evolution, self-organized criticality, and non-equilibrium statistical mechanics.',
