@@ -27,6 +27,12 @@ def e(value):
     return escape(str(value), quote=True)
 
 
+def themed_asset(name):
+    # A changed theme must not be mixed with a cached stylesheet or controller.
+    version = sha256((DIST / name).read_bytes()).hexdigest()[:12]
+    return f'/{name}?v={version}'
+
+
 def brand():
     return '<span class="brand-symbol"><img src="/assets/bioracle-logo.png" alt="" width="1254" height="1254"></span><span class="brand-word"><b>BI</b>Oracle</span>'
 
@@ -95,7 +101,7 @@ def write_page(path, title, description, content, active='', body_class='', scri
     <title>{e(title)}{' | BIOracle' if title != 'BIOracle' else ' — Taming risk the way nature does'}</title><meta name="description" content="{e(description)}"><meta name="theme-color" content="#f5f3ed">
     <link rel="canonical" href="{URL}{path}"><meta property="og:type" content="website"><meta property="og:title" content="{e(title)} | BIOracle"><meta property="og:description" content="{e(description)}"><meta property="og:image" content="{URL}/assets/scattered-pencil-evolution-equations.webp"><meta property="og:url" content="{URL}{path}">
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="/assets/P052-Roman.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/assets/NimbusSans-Regular.woff" as="font" type="font/woff" crossorigin>
-    <link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/atmosphere.css"><script src="/site.js" defer></script><script src="/vendor/supabase-2.116.0.js" defer></script><script src="/account-config.js" defer></script><script src="/accounts.js" defer></script>{extra_head}</head>
+    <script src="{themed_asset('theme.js')}"></script><link rel="stylesheet" href="{themed_asset('styles.css')}"><link rel="stylesheet" href="{themed_asset('atmosphere.css')}"><link rel="stylesheet" href="{themed_asset('theme.css')}"><script src="{themed_asset('site.js')}" defer></script><script src="/vendor/supabase-2.116.0.js" defer></script><script src="/account-config.js" defer></script><script src="/accounts.js" defer></script>{extra_head}</head>
     <body id="top" class="{e(body_class)}" style="--sketch-offset:-{sketch_offset}px;--sketch-x:{sketch_x}%">{header(active)}<main id="main">{content}</main>{footer()}{account_dialog()}<div id="notification" class="notification" role="status" aria-live="polite"></div></body></html>'''
     if BASE_PATH:
         doc = re.sub(r'\b(href|src)="(/(?!/)[^"]*)"', lambda match: f'{match.group(1)}="{BASE_PATH}{match.group(2)}"', doc)
@@ -415,7 +421,7 @@ def aliases():
     for source,target in [('team','consortium'),('members','consortium'),('collaborations','consortium'),('contractor','consulting')]:
         destination=DIST/source/'index.html'
         destination.parent.mkdir(parents=True,exist_ok=True)
-        destination.write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={BASE_PATH}/{target}/"><title>BIOracle</title><link rel="canonical" href="{URL}/{target}/"></head><body><p><a href="{BASE_PATH}/{target}/">Continue to {target}</a></p></body></html>')
+        destination.write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script src="{BASE_PATH}{themed_asset("theme.js")}"></script><link rel="stylesheet" href="{BASE_PATH}{themed_asset("styles.css")}"><link rel="stylesheet" href="{BASE_PATH}{themed_asset("theme.css")}"><meta http-equiv="refresh" content="0;url={BASE_PATH}/{target}/"><title>BIOracle</title><link rel="canonical" href="{URL}/{target}/"></head><body><p><a href="{BASE_PATH}/{target}/">Continue to {target}</a></p></body></html>')
 
 
 home()

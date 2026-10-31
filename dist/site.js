@@ -1,34 +1,5 @@
 'use strict';
 
-// Persistent, user-controlled color theme. Keep the default aligned with the
-// existing light design and expose the control on every page.
-(() => {
-  const root = document.documentElement;
-  let saved = null;
-  try { saved = localStorage.getItem('bioracle-theme'); } catch (_) {}
-  if (saved === 'dark' || saved === 'light') root.dataset.theme = saved;
-
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'theme-toggle';
-  button.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'));
-  button.setAttribute('aria-label', root.dataset.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-  const isDark = root.dataset.theme === 'dark';
-  button.innerHTML = `<span class="theme-toggle-icon" aria-hidden="true">${isDark ? '☀' : '☾'}</span><span class="theme-toggle-label">${isDark ? 'Light mode' : 'Dark mode'}</span>`;
-  const header = document.querySelector('.site-header');
-  const menu = header?.querySelector('.menu-toggle');
-  if (menu) header.insertBefore(button, menu);
-  button.addEventListener('click', () => {
-    const dark = root.dataset.theme !== 'dark';
-    root.dataset.theme = dark ? 'dark' : 'light';
-    button.setAttribute('aria-pressed', String(dark));
-    button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-    button.querySelector('.theme-toggle-icon').textContent = dark ? '☀' : '☾';
-    button.querySelector('.theme-toggle-label').textContent = dark ? 'Light mode' : 'Dark mode';
-    try { localStorage.setItem('bioracle-theme', dark ? 'dark' : 'light'); } catch (_) {}
-  });
-})();
-
 // Offset the page-attached wallpaper by half the scroll distance, so its
 // apparent movement through the viewport is 50% of the content's movement.
 (() => {

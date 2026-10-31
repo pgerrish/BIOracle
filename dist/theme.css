@@ -1,0 +1,109 @@
+/* Load after the layout styles so every route and responsive state uses one theme. */
+:root { color-scheme: light; }
+html { background: var(--paper); }
+
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #17221d;
+    --ink: #e8eee9;
+    --muted: #bdc8c0;
+    --green: #9bc5a8;
+    --line: #405148;
+    --soft: #26352d;
+    --surface: #1d2a23;
+    --control: #22352a;
+    --control-hover: #30483a;
+    --control-border: #708c7b;
+    --action: #355b49;
+    --action-hover: #416a54;
+    --action-text: #f2f6f3;
+  }
+
+  :root[data-theme="dark"] body { background: var(--paper); color: var(--ink); }
+  :root[data-theme="dark"] body::before { mix-blend-mode: screen; opacity: .11; }
+  :root[data-theme="dark"] ::selection { background: #46644f; color: #fff; }
+
+  :root[data-theme="dark"] :is(.site-header, .site-footer, .hero-content, .hero-caption,
+    #main > section:not(.hero), .glass, .path-panel-green) {
+    background: var(--surface);
+    border-color: var(--line);
+    box-shadow: inset 0 1px 0 #ffffff09, 0 10px 30px #0000001f;
+  }
+  :root[data-theme="dark"] :is(.article-lead, .micro-note, .footer-bottom, .hero-caption) { color: var(--muted); }
+  :root[data-theme="dark"] :is(.brand-word, .hero h1 em, .hero-tagline) { color: var(--ink); }
+  :root[data-theme="dark"] .brand-symbol { mix-blend-mode: normal; }
+  :root[data-theme="dark"] .brand-symbol img { filter: invert(1) hue-rotate(115deg); mix-blend-mode: screen; }
+  :root[data-theme="dark"] .hero-caption span:last-child { background: transparent; }
+  :root[data-theme="dark"] .portrait { background: var(--soft); }
+  :root[data-theme="dark"] :is(.portrait img, .profile-photo img) { mix-blend-mode: normal; }
+
+  /* The mobile dropdown is its own opaque surface, not part of the header glass. */
+  :root[data-theme="dark"] .site-header nav { color: var(--ink); border-color: var(--line); }
+  :root[data-theme="dark"] .site-header nav a { color: var(--ink); }
+  :root[data-theme="dark"] .site-header nav :is(a:hover, a:focus-visible, a[aria-current]) { color: var(--green); }
+  :root[data-theme="dark"] .site-header nav .nav-work { border-color: var(--line); }
+  :root[data-theme="dark"] .menu-toggle { color: var(--ink); }
+
+  /* Solid foreground/background pairs keep all action states readable. */
+  :root[data-theme="dark"] .button {
+    background: var(--action);
+    color: var(--action-text);
+    border-color: var(--control-border);
+  }
+  :root[data-theme="dark"] .button:hover {
+    background: var(--action-hover);
+  }
+  :root[data-theme="dark"] :is(.button-quiet, .hero-actions .button, .theme-toggle, .nav-login, .account-mode-buttons button) {
+    background: var(--control);
+    color: var(--ink);
+    border-color: var(--control-border);
+  }
+  :root[data-theme="dark"] :is(.button-quiet, .hero-actions .button, .theme-toggle, .nav-login, .account-mode-buttons button):hover {
+    background: var(--control-hover);
+    color: var(--ink);
+  }
+  :root[data-theme="dark"] .account-mode-buttons button[aria-pressed="true"] {
+    background: var(--action); color: var(--action-text); border-color: var(--control-border);
+  }
+  :root[data-theme="dark"] .account-mode-buttons button[aria-pressed="true"]:hover { background: var(--action-hover); }
+  :root[data-theme="dark"] :is(.text-link, .text-button) { color: var(--ink); border-color: var(--control-border); }
+  :root[data-theme="dark"] :is(.text-link, .text-button):hover { color: var(--green); border-color: var(--green); }
+  :root[data-theme="dark"] :is(.filter-bar, .forecast-controls) button { color: var(--muted); background: transparent; }
+  :root[data-theme="dark"] :is(.filter-bar, .forecast-controls) button[aria-pressed="true"] {
+    color: var(--ink); background: #344b3d; border-color: var(--control-border); box-shadow: none;
+  }
+  :root[data-theme="dark"] :is(.filter-bar, .forecast-controls) button:hover { color: var(--ink); background: var(--control-hover); }
+  :root[data-theme="dark"] .skip-link { background: var(--action); color: var(--action-text); }
+
+  :root[data-theme="dark"] :is(input, select, textarea, .template-mapping-row select, .contract-template-panel input[type="file"]) {
+    color: var(--ink); background: var(--control); border-color: var(--control-border); accent-color: var(--green);
+  }
+  :root[data-theme="dark"] :is(input, textarea)::placeholder { color: var(--muted); opacity: 1; }
+  :root[data-theme="dark"] option { color: var(--ink); background: var(--control); }
+  :root[data-theme="dark"] input::file-selector-button {
+    color: var(--ink); background: var(--control-hover); border: 1px solid var(--control-border); border-radius: 3px;
+  }
+  :root[data-theme="dark"] :is(.account-dialog, .contract-template-panel, .contract-budget-summary, .archive-notice) {
+    background: var(--surface); color: var(--ink); border-color: var(--line);
+  }
+  :root[data-theme="dark"] .account-dialog::backdrop { background: #00000099; }
+  :root[data-theme="dark"] :is(.method-steps > div, .template-mappings, .template-mapping-row) { border-color: var(--line); }
+  :root[data-theme="dark"] .draft-conflict { background: #332e1f; color: #f1dfab; border-color: #a78b49; }
+  :root[data-theme="dark"] .draft-conflict p { color: #f1dfab; }
+  :root[data-theme="dark"] .contract-errors { background: #382620; color: #ffd5c9; border-color: #d7917c; }
+  :root[data-theme="dark"] .contract-errors p { color: #ffd5c9; }
+  :root[data-theme="dark"] .required-mark { color: #ffb4a8; }
+  :root[data-theme="dark"] [aria-invalid="true"] { border-color: #d7917c; }
+  :root[data-theme="dark"] .template-preview:not([hidden]) { background: var(--surface); border-color: var(--line); color-scheme: dark; }
+
+  :root[data-theme="dark"] .forecast-chart text { fill: var(--muted); }
+  :root[data-theme="dark"] :is(.chart-axis, .chart-now) { stroke: var(--control-border); }
+  :root[data-theme="dark"] .chart-history { stroke: var(--green); }
+  :root[data-theme="dark"] .chart-path { stroke: #a7bfac; }
+  :root[data-theme="dark"] .forecast-chart circle { fill: var(--green); }
+
+  @media (max-width: 1200px) {
+    :root[data-theme="dark"] .site-header nav { background: var(--surface); box-shadow: 0 18px 35px #00000040; }
+  }
+}
